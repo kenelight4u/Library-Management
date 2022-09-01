@@ -7,9 +7,6 @@
   <ItemGroup>
     <Folder Include="Handlers\" />
     <Folder Include="Helpers\" />
-    <Folder Include="Interfaces\Utilities\" />
-    <Folder Include="Interfaces\Services\" />
-    <Folder Include="Interfaces\Persistence\" />
   </ItemGroup>
 
 </Project>
