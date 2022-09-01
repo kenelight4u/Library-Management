@@ -1,3 +1,5 @@
+using LM.API.Util;
+using log4net;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -13,7 +15,22 @@ namespace LM.API
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            try
+            {
+                CreateHostBuilder(args)
+                    .ConfigureLog4Net()
+                    .Build()
+                    .Run();
+            }
+            catch (Exception ex)
+            {
+
+                LogManager.GetLogger(typeof(Program)).Error(ex.StackTrace, ex);
+            }
+            finally
+            {
+                LogManager.Shutdown();
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

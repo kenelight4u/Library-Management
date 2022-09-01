@@ -17,7 +17,7 @@ namespace LM.Application.Interfaces.Persistence
         /// Generic repository that take any entity type.
         /// It enables us to perform all data operations on any data table in the database.
         /// </summary>
-        IDataStore<T> DataStore { get; }
+        IRepository<T> DataStore { get; }
 
         /// <summary>
         /// This saves all changes made to the currently staged context.

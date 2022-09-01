@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LM.Domain.Entities
 {
-    public class LMUser : IdentityUser<Guid>
+    public class LMUser : IdentityUser
     {
         /// <summary>
         /// Gets or sets the first name.

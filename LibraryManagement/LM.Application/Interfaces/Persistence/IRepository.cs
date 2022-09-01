@@ -12,7 +12,7 @@ namespace LM.Application.Interfaces.Persistence
     /// It enables us to perform all data operations on any data table in the database.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IDataStore<T> where T : class
+    public interface IRepository<T> where T : class
     {
         /// <summary>
         /// This method creates an object of type T which is passed to it in the database.
