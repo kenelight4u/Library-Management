@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LM.Persistence.DataInitializer;
 
 namespace LM.API
 {
@@ -60,6 +61,9 @@ namespace LM.API
             {
                 endpoints.MapControllers();
             });
+
+            //Seeding default user and role to database
+            UserAndRoleDataInitializer.SeedData(app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope().ServiceProvider);
         }
     }
 }
