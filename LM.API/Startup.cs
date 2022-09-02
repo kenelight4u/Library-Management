@@ -14,6 +14,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LM.Persistence.DataInitializer;
+using LM.Application;
 
 namespace LM.API
 {
@@ -37,7 +39,8 @@ namespace LM.API
             });
 
             //**Bringing in the dependency injection class from persistence where services are registered.**/
-            services.AddPersistence(Configuration);
+           services.AddPersistence(Configuration);
+           services.AddApplication();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +63,9 @@ namespace LM.API
             {
                 endpoints.MapControllers();
             });
+
+            //Seeding default user and role to database
+            UserAndRoleDataInitializer.SeedData(app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope().ServiceProvider);
         }
     }
 }
