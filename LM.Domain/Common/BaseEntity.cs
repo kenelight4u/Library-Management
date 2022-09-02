@@ -13,5 +13,17 @@ namespace LM.Domain.Common
         /// </summary>
         /// <value>The ID.</value>
         public Guid ID { get; set; }
+
+        /// <summary>
+        /// Gets or sets the LastModificationTime.
+        /// </summary>
+        /// <value>The LastModificationTime.</value>
+        public DateTime? LastModificationTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets the LastModificationTime.
+        /// </summary>
+        /// <value>The CreationTime.</value>
+        public DateTime? CreationTime { get; set; }
     }
 }
