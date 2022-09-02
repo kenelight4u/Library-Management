@@ -40,7 +40,7 @@ namespace LM.Persistence.DataInitializer
                     LockoutEnabled = false
                 };
 
-                IdentityResult result = userManager.CreateAsync(user, "Admin_Lm").Result;
+                IdentityResult result = userManager.CreateAsync(user, "Admin_4Lm").Result;
                 if (result.Succeeded)
                 {
                     userManager.AddToRoleAsync(user, "SuperAdmin").Wait();
@@ -63,14 +63,14 @@ namespace LM.Persistence.DataInitializer
             }
 
 
-            if (!roleManager.RoleExistsAsync("Admin").Result)
+            if (!roleManager.RoleExistsAsync("Customers").Result)
             {
                 IdentityRole role = new IdentityRole();
                 role.Name = "Customers";
                 IdentityResult roleResult = roleManager.CreateAsync(role).Result;
             }
 
-            if (!roleManager.RoleExistsAsync("Staff").Result)
+            if (!roleManager.RoleExistsAsync("Clients").Result)
             {
                 IdentityRole role = new IdentityRole();
                 role.Name = "Clients";
