@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LM.API</name>
+    </assembly>
+    <members>
+        <member name="T:LM.API.Controllers.MainController">
+            <summary>
+            This is the base controller of this application that other controllers inherits.
+            It helps in versioning the application. The Mediator is the messenger/middle man
+            between this base controller and other controllers in this application.
+            </summary>
+        </member>
+        <member name="P:LM.API.Controllers.MainController.Mediator">
+            <summary>
+            This is the entry point to all the controllers in  this application.
+            It send http request through the mediator messenger to any controller that is invoked.
+            </summary>
+        </member>
+        <member name="M:LM.API.Util.ContextAccessor.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+            <summary>
+            Contructor for dependency injections.
+            </summary>
+            <param name="contextAccessor"></param>
+        </member>
+        <member name="M:LM.API.Util.ContextAccessor.GetCurrentUserId">
+            <summary>
+            This returns the ID of the currently signed in user.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LM.API.Util.ContextAccessor.GetCurrentUserEmail">
+            <summary>
+            This gets the email of the currently signed in user.
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
