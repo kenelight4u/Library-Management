@@ -17,6 +17,164 @@
             It send http request through the mediator messenger to any controller that is invoked.
             </summary>
         </member>
+        <member name="T:LM.API.Controllers.v1.AuthController">
+            <summary>
+            This controller handles all account processes of this application.
+            Registration, Update and all account verification of user.
+            </summary>
+        </member>
+        <member name="M:LM.API.Controllers.v1.AuthController.#ctor(Microsoft.AspNetCore.Identity.UserManager{LM.Domain.Entities.LMUser},Microsoft.AspNetCore.Identity.SignInManager{LM.Domain.Entities.LMUser},Microsoft.AspNetCore.Identity.RoleManager{Microsoft.AspNetCore.Identity.IdentityRole},Microsoft.Extensions.Configuration.IConfiguration,LM.Application.Interfaces.Utilities.IContextAccessor,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Constructor for dependency injections
+            </summary>
+            <param name="userManager"></param>
+            <param name="signInManager"></param>
+            <param name="roleManager"></param>
+            <param name="config"></param>
+            <param name="contextAccessor"></param>
+            <param name="env"></param>
+        </member>
+        <member name="M:LM.API.Controllers.v1.AuthController.SignUp(LM.DTOs.Request.AuthDTO.SignUpDTO)">
+            <summary>
+            This endpoint registers custormers on this application.
+            </summary>
+            <param name="model"></param>
+            <returns></returns> 
+        </member>
+        <member name="M:LM.API.Controllers.v1.AuthController.ClientsSignUp(LM.DTOs.Request.AuthDTO.SignUpDTO)">
+            <summary>
+            This endpoint registers Clients on this application.
+            </summary>
+            <param name="model"></param>
+            <returns></returns> 
+        </member>
+        <member name="M:LM.API.Controllers.v1.AuthController.SignIn(LM.DTOs.Request.AuthDTO.SignInDTO)">
+            <summary>
+            This endpoint signs in a user whose correct credentials are sent in.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.AuthController.UpdateAccount(LM.DTOs.Request.AuthDTO.EditDTO)">
+            <summary>
+            This endpoint Updates staff Details on this application.
+            </summary>
+            <param name="model"></param>
+            <returns></returns> 
+        </member>
+        <member name="M:LM.API.Controllers.v1.AuthController.ChangePassword(LM.DTOs.Request.AuthDTO.ChangePasswordDTO)">
+            <summary>
+            This endpoint changes user's account password.
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.AuthController.LogOut">
+            <summary>
+            This endpoint logs out users.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.AuthController.GenerateJWT(LM.Domain.Entities.LMUser)">
+            <summary>
+            This method generates access token for the user that is passed into it.
+            </summary>
+            <param name="user"></param>
+            <returns>string Token</returns>
+        </member>
+        <member name="T:LM.API.Controllers.v1.BookGenresController">
+            <summary>
+            This controller handles all Book Genres processes of this application.
+            Registration, Update and all account verification of user.
+            </summary>
+        </member>
+        <member name="M:LM.API.Controllers.v1.BookGenresController.#ctor(LM.Application.Interfaces.Services.IBookGenresService)">
+            <summary>
+            Constructor for dependency injections
+            </summary>
+            <param name="bookGenresService"></param>
+        </member>
+        <member name="M:LM.API.Controllers.v1.BookGenresController.AddBookGenre(LM.DTOs.Request.BookGenreDTO.BookGenresDTO)">
+            <summary>
+            This endpoint creates Book Genre.
+            </summary>
+            <param name="bookGenresDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.BookGenresController.GetAllBooksGenres(LM.Domain.Common.ViewModel.SearchVM)">
+            <summary>
+            This endpoint gets all Book Genres.
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.BookGenresController.GetABooksGenres(System.Guid)">
+            <summary>
+            This endpoint gets a Book Genres and all Books under it.
+            </summary>
+            <param name="ID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.BookGenresController.UpdateBookGenre(LM.DTOs.Request.BookGenreDTO.EditBookGenresDTO)">
+            <summary>
+            This endpoint updates a Book Genre Details
+            </summary>
+            <param name="bookGenresDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.BookGenresController.DeleteBookGenre(System.Guid)">
+            <summary>
+            This endpoint Deletes a Book Genre.
+            </summary>
+            <param name="ID"></param>
+            <returns></returns>
+        </member>
+        <member name="T:LM.API.Program">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LM.API.Program.Main(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:LM.API.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:LM.API.Startup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LM.API.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Constructor for dependency injection
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:LM.API.Startup.Configuration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LM.API.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:LM.API.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
         <member name="M:LM.API.Util.ContextAccessor.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor)">
             <summary>
             Contructor for dependency injections.

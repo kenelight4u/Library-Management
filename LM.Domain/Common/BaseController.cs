@@ -18,6 +18,8 @@ namespace LM.Domain.Common
     /// Implements the <see cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
     /// </summary>
     /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
+    [Route("api/v{version:apiVersion}/[controller]")]
+    [ApiController]
     public class BaseController : ControllerBase
     {
         /// <summary>

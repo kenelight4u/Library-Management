@@ -24,5 +24,7 @@ namespace LM.Persistence.Context
         public DbSet<BookHistory> BookHistories { get; set; }
 
         public DbSet<BookGenres> BookGenres { get; set; }
+
+        public DbSet<BookInventory> BookInventories { get; set; }
     }
 }

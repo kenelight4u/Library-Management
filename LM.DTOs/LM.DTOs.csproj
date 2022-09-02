@@ -5,12 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Request\" />
-    <Folder Include="Response\" />
+    <ProjectReference Include="..\LM.Domain\LM.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LM.Domain\LM.Domain.csproj" />
+    <Folder Include="Request\BookDTO\" />
+    <Folder Include="Response\BookVM\" />
   </ItemGroup>
 
 </Project>
