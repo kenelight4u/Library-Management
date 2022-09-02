@@ -42,7 +42,7 @@ namespace LM.Domain.Common.ViewModel
         /// Gets or sets the filters.
         /// </summary>
         /// <value>The filters.</value>
-        public List<Filter> Filters { get; set; } = new List<Filter>();
+        public Filter Filter { get; set; } 
     }
 
     /// <summary>
@@ -54,20 +54,13 @@ namespace LM.Domain.Common.ViewModel
         /// Gets or sets the keyword.
         /// </summary>
         /// <value>The keyword.</value>
-        [Required] public string Keyword { get; set; }
+        public string Keyword { get; set; }
 
         /// <summary>
         /// Gets or sets the filter column.
         /// </summary>
         /// <value>The filter column.</value>
-        [Required] public string FilterColumn { get; set; }
+        public string FilterColumn { get; set; }
 
-        /// <summary>
-        /// Gets or sets the operation.
-        /// </summary>
-        /// <value>The operation.</value>
-       // [Required] public FilterOperation? Operation { get; set; }
-
-        //Discuss with Paul
     }
 }

@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LM.Application\LM.Application.csproj" />
+    <ProjectReference Include="..\LM.DTOs\LM.DTOs.csproj" />
     <ProjectReference Include="..\LM.Persistence\LM.Persistence.csproj" />
   </ItemGroup>
 

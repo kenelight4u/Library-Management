@@ -17,6 +17,12 @@ namespace LM.Domain.Common
         /// <summary>
         /// Gets or sets the LastModificationTime.
         /// </summary>
+        /// <value>The CreationTime.</value>
+        public string CreatorUserId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the LastModificationTime.
+        /// </summary>
         /// <value>The LastModificationTime.</value>
         public DateTime? LastModificationTime { get; set; }
 

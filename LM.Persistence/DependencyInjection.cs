@@ -1,7 +1,9 @@
 ﻿using LM.Application.Interfaces.Persistence;
+using LM.Application.Interfaces.Services;
 using LM.Application.Interfaces.Utilities;
 using LM.Persistence.Context;
 using LM.Persistence.Implementation;
+using LM.Services.Implementations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,6 +35,8 @@ namespace LM.Persistence
 
             services.AddScoped(typeof(IStoreManager<>), typeof(StoreManager<>));
             //services.AddScoped(typeof(IUnitOfWork), typeof(EfCoreUnitOfWork));
+
+            services.AddScoped<IBookGenresService, BookGenreService>();
             
         }
         

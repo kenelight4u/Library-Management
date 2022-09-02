@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Implementations\" />
+    <ProjectReference Include="..\LM.Application\LM.Application.csproj" />
   </ItemGroup>
 
 </Project>
