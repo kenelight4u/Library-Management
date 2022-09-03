@@ -81,6 +81,74 @@
             <param name="user"></param>
             <returns>string Token</returns>
         </member>
+        <member name="T:LM.API.Controllers.v1.BookController">
+            <summary>
+            This controller handles all Book processes of this application.
+            Registration, Update and all account verification of user.
+            </summary>
+        </member>
+        <member name="M:LM.API.Controllers.v1.BookController.#ctor(LM.Application.Interfaces.Services.IBookService)">
+            <summary>
+            Constructor for dependency injections
+            </summary>
+            <param name="bookService"></param>
+        </member>
+        <member name="M:LM.API.Controllers.v1.BookController.AddNewBook(LM.DTOs.Request.BookDTO.BookDTO)">
+            <summary>
+            This endpoint creates a new Book.
+            </summary>
+            <param name="bookGDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.BookController.GetAllBooks(LM.Domain.Common.ViewModel.SearchVM)">
+            <summary>
+            This endpoint gets all Books.
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.BookController.ViewInventory(LM.Domain.Common.ViewModel.pagiSearchVm)">
+            <summary>
+            This endpoint gets the Inventory Records.
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.BookController.GetABookByID(System.Guid)">
+            <summary>
+            This endpoint gets a Book by ID.
+            </summary>
+            <param name="ID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.BookController.GetABookByISBN(System.String)">
+            <summary>
+            This endpoint gets a Book by ISBN.
+            </summary>
+            <param name="isbn"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.BookController.EditABook(LM.DTOs.Request.BookDTO.EditBookDTO)">
+            <summary>
+            This endpoint updates a Book Details
+            </summary>
+            <param name="bookDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.BookController.UpdateInventory(LM.DTOs.Request.BookDTO.BookInventoryUpdateDTO)">
+            <summary>
+            This endpoint updates a Book Inventory Details
+            </summary>
+            <param name="bookInvDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.BookController.DeleteBook(System.Guid)">
+            <summary>
+            This endpoint Deletes a Book.
+            </summary>
+            <param name="ID"></param>
+            <returns></returns>
+        </member>
         <member name="T:LM.API.Controllers.v1.BookGenresController">
             <summary>
             This controller handles all Book Genres processes of this application.
@@ -191,6 +259,18 @@
             <summary>
             This gets the email of the currently signed in user.
             </summary>
+            <returns></returns>
+        </member>
+        <member name="T:LM.API.Util.Log4NetHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LM.API.Util.Log4NetHelper.ConfigureLog4Net(Microsoft.Extensions.Hosting.IHostBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="webHost"></param>
             <returns></returns>
         </member>
     </members>

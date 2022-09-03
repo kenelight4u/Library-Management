@@ -37,6 +37,7 @@ namespace LM.Persistence
             //services.AddScoped(typeof(IUnitOfWork), typeof(EfCoreUnitOfWork));
 
             services.AddScoped<IBookGenresService, BookGenreService>();
+            services.AddScoped<IBookService, BookService>();
             
         }
         

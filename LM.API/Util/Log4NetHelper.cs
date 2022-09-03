@@ -9,8 +9,16 @@ using System.IO;
 
 namespace LM.API.Util
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class Log4NetHelper
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="webHost"></param>
+        /// <returns></returns>
         public static IHostBuilder ConfigureLog4Net(this IHostBuilder webHost)
         {
             var log4NetConfig = new XmlDocument();

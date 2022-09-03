@@ -12,9 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace LM.Services.Implementations
 {
@@ -119,10 +117,10 @@ namespace LM.Services.Implementations
         {
             var query =  _bookGenre.DataStore.GetAllQuery();
 
-            return await SearchProducts(query, model);
+            return await SearchBooksGenre(query, model);
         }
 
-        private async Task<ResultModel<PagedList<BookGenresVM>>> SearchProducts(IQueryable<BookGenres> query, SearchVM model)
+        private async Task<ResultModel<PagedList<BookGenresVM>>> SearchBooksGenre(IQueryable<BookGenres> query, SearchVM model)
         {
             if (model.Filter is not null)
                 query = BuildQueryFilter(query, model.Filter);

@@ -8,9 +8,4 @@
     <ProjectReference Include="..\LM.Domain\LM.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Request\BookDTO\" />
-    <Folder Include="Response\BookVM\" />
-  </ItemGroup>
-
 </Project>
