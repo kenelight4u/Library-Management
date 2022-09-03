@@ -19,7 +19,7 @@ namespace LM.Persistence.Context
 
         public DbSet<LMUser> LMUsers { get; set; }
 
-        public DbSet<Book> Bookss { get; set; }
+        public DbSet<Book> Books { get; set; }
 
         public DbSet<BookHistory> BookHistories { get; set; }
 

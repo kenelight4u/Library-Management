@@ -204,7 +204,7 @@ namespace LM.Services.Implementations
 
         private Task<BookInventory> GetBookInventoryByID(Guid ID)
         {
-            return _bookInv.DataStore.GetAllQuery().Where(x => x.ID == ID).FirstOrDefaultAsync();
+            return _bookInv.DataStore.GetAllQuery().Where(x => x.BookId == ID).FirstOrDefaultAsync();
         }
 
         private async Task<ResultModel<PagedList<BookVM>>> SearchBooks(IQueryable<Book> query, SearchVM model)

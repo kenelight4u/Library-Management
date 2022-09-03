@@ -53,7 +53,7 @@ namespace LM.API.Controllers.v1
                 if (!result.HasError)
                     return ApiResponse<string>(message: result.Message, codes: ApiResponseCodes.OK, data: result.Data, totalCount: 1);
 
-                return ApiResponse(message: result.Message, codes: ApiResponseCodes.ERROR, data: result.Data, totalCount: 0, errors: result.Message);
+                return ApiResponse(message: result.Message, codes: ApiResponseCodes.ERROR, data: result.Data, totalCount: 0, errors: result.GetErrorMessages().ToArray());
             }
 
             catch (Exception ex)

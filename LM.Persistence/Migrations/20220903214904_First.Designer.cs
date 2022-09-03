@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LM.Persistence.Migrations
 {
     [DbContext(typeof(LibraryManagementDbContext))]
-    [Migration("20220903213833_Seeded Data")]
-    partial class SeededData
+    [Migration("20220903214904_First")]
+    partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,7 +58,7 @@ namespace LM.Persistence.Migrations
 
                     b.HasIndex("BookGenresId");
 
-                    b.ToTable("Bookss");
+                    b.ToTable("Books");
                 });
 
             modelBuilder.Entity("LM.Domain.Entities.BookGenres", b =>

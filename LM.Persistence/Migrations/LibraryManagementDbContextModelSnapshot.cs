@@ -56,7 +56,7 @@ namespace LM.Persistence.Migrations
 
                     b.HasIndex("BookGenresId");
 
-                    b.ToTable("Bookss");
+                    b.ToTable("Books");
                 });
 
             modelBuilder.Entity("LM.Domain.Entities.BookGenres", b =>
