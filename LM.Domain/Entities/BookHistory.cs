@@ -31,12 +31,12 @@ namespace LM.Domain.Entities
         /// Gets or sets the ReturnedDate.
         /// </summary>
         /// <value>The ReturnedDate.</value>
-        public DateTime? IssuedDate { get; set; }
+        public DateTime IssuedDate { get; set; }
 
         /// <summary>
         /// Gets or sets the ReturnedDatee.
         /// </summary>
         /// <value>The ReturnedDate.</value>
-        public DateTime? ReturnedDate { get; set; }
+        public DateTime ReturnedDate { get; set; }
     }
 }

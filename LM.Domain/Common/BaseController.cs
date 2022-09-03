@@ -14,7 +14,9 @@ using System.Threading.Tasks;
 namespace LM.Domain.Common
 {
     /// <summary>
-    /// Class BaseController.
+    /// This is the base controller of this application that other controllers inherits.
+    /// It helps in versioning the application. The Mediator is the messenger/middle man
+    /// between this base controller and other controllers in this application.
     /// Implements the <see cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
     /// </summary>
     /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />

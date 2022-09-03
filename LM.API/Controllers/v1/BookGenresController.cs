@@ -8,6 +8,7 @@ using System;
 using LM.DTOs.Request.BookGenreDTO;
 using LM.Domain.Utils.Pagination;
 using LM.DTOs.Response.BookGenresVM;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LM.API.Controllers.v1
 {
@@ -15,6 +16,8 @@ namespace LM.API.Controllers.v1
     /// This controller handles all Book Genres processes of this application.
     /// Registration, Update and all account verification of user.
     /// </summary>
+    [ApiVersion("1.0")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class BookGenresController :  BaseController
     {
         private readonly IBookGenresService _bookGenresService;
@@ -34,6 +37,7 @@ namespace LM.API.Controllers.v1
         /// <param name="bookGenresDTO"></param>
         /// <returns></returns>
         [HttpPost("BookGenre")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "SuperAdmin")]
         [ProducesResponseType(typeof(ApiResponse<string>), 200)]
         public async Task<IActionResult> AddBookGenre([FromBody] BookGenresDTO bookGenresDTO)
         {
@@ -115,6 +119,7 @@ namespace LM.API.Controllers.v1
         /// <param name="bookGenresDTO"></param>
         /// <returns></returns>
         [HttpPut()]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "SuperAdmin")]
         [ProducesResponseType(typeof(ApiResponse<string>), 200)]
         public async Task<IActionResult> UpdateBookGenre([FromForm] EditBookGenresDTO bookGenresDTO)
         {
@@ -141,6 +146,7 @@ namespace LM.API.Controllers.v1
         /// <param name="ID"></param>
         /// <returns></returns>
         [HttpDelete()]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "SuperAdmin")]
         [ProducesResponseType(typeof(ApiResponse<string>), 200)]
         public async Task<IActionResult> DeleteBookGenre([FromQuery] Guid ID)
         {

@@ -38,7 +38,8 @@ namespace LM.Persistence
 
             services.AddScoped<IBookGenresService, BookGenreService>();
             services.AddScoped<IBookService, BookService>();
-            
+            services.AddScoped<ITransactionsService, TransactionsService>();
+
         }
         
     }
