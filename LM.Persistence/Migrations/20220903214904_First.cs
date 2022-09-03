@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LM.Persistence.Migrations
 {
-    public partial class Initial : Migration
+    public partial class First : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -58,6 +58,7 @@ namespace LM.Persistence.Migrations
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -173,7 +174,7 @@ namespace LM.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Bookss",
+                name: "Books",
                 columns: table => new
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -183,14 +184,15 @@ namespace LM.Persistence.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     BookGenresId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Bookss", x => x.ID);
+                    table.PrimaryKey("PK_Books", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Bookss_BookGenres_BookGenresId",
+                        name: "FK_Books_BookGenres_BookGenresId",
                         column: x => x.BookGenresId,
                         principalTable: "BookGenres",
                         principalColumn: "ID",
@@ -205,8 +207,9 @@ namespace LM.Persistence.Migrations
                     BookId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     LMUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     BorrowStatus = table.Column<int>(type: "int", nullable: false),
-                    IssuedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ReturnedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IssuedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ReturnedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -220,9 +223,31 @@ namespace LM.Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_BookHistories_Bookss_BookId",
+                        name: "FK_BookHistories_Books_BookId",
                         column: x => x.BookId,
-                        principalTable: "Bookss",
+                        principalTable: "Books",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BookInventories",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    BookId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookInventories", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_BookInventories_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -277,8 +302,13 @@ namespace LM.Persistence.Migrations
                 column: "LMUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bookss_BookGenresId",
-                table: "Bookss",
+                name: "IX_BookInventories_BookId",
+                table: "BookInventories",
+                column: "BookId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Books_BookGenresId",
+                table: "Books",
                 column: "BookGenresId");
         }
 
@@ -303,13 +333,16 @@ namespace LM.Persistence.Migrations
                 name: "BookHistories");
 
             migrationBuilder.DropTable(
+                name: "BookInventories");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Bookss");
+                name: "Books");
 
             migrationBuilder.DropTable(
                 name: "BookGenres");

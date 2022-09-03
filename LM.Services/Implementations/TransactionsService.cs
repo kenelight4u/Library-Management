@@ -70,7 +70,9 @@ namespace LM.Services.Implementations
                 IssuedDate = DateTime.Now
             };
 
-            book.BookHistories.Add(issueBook);
+            await _bookHistory.DataStore.Add(issueBook);
+            await _bookHistory.SaveChanges();
+
             book.Quantity--;
 
             _book.DataStore.Update(book);
@@ -171,7 +173,7 @@ namespace LM.Services.Implementations
                 BookDetails = x.Books,
                 BookStatus = x.BorrowStatus.GetDescription(),
                 IssuedDate = x.IssuedDate.ToLongDateString(),
-                ReturnedDate = x.ReturnedDate.ToLongDateString(),
+                ReturnedDate = (x.BorrowStatus == Domain.Enums.BookCustomerStatus.IssuedOut) ? "Not Returned" : x.ReturnedDate.ToLongDateString(),
                 UserFullName = $"{x.LMUsers.FirstName} {x.LMUsers.LastName}"
             }).ToList();
 

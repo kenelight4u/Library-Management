@@ -13,6 +13,8 @@ namespace LM.DTOs.Response.BookVM
 {
     public class BookVM
     {
+        public Guid ID { get; set; }
+
         public string ISBN { get; set; }
 
         public string Title { get; set; }
@@ -31,6 +33,7 @@ namespace LM.DTOs.Response.BookVM
                 ? null
                 : new BookVM
                 {
+                    ID = model.ID,
                     Author = model.Author,
                     Title = model.Title,
                     ISBN = model.ISBN,
