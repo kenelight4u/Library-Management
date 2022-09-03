@@ -4,19 +4,6 @@
         <name>LM.API</name>
     </assembly>
     <members>
-        <member name="T:LM.API.Controllers.MainController">
-            <summary>
-            This is the base controller of this application that other controllers inherits.
-            It helps in versioning the application. The Mediator is the messenger/middle man
-            between this base controller and other controllers in this application.
-            </summary>
-        </member>
-        <member name="P:LM.API.Controllers.MainController.Mediator">
-            <summary>
-            This is the entry point to all the controllers in  this application.
-            It send http request through the mediator messenger to any controller that is invoked.
-            </summary>
-        </member>
         <member name="T:LM.API.Controllers.v1.AuthController">
             <summary>
             This controller handles all account processes of this application.
@@ -56,7 +43,7 @@
         </member>
         <member name="M:LM.API.Controllers.v1.AuthController.UpdateAccount(LM.DTOs.Request.AuthDTO.EditDTO)">
             <summary>
-            This endpoint Updates staff Details on this application.
+            This endpoint Updates Users Details on this application.
             </summary>
             <param name="model"></param>
             <returns></returns> 
@@ -137,7 +124,7 @@
         </member>
         <member name="M:LM.API.Controllers.v1.BookController.UpdateInventory(LM.DTOs.Request.BookDTO.BookInventoryUpdateDTO)">
             <summary>
-            This endpoint updates a Book Inventory Details
+            This endpoint updates a Book Inventory (quantity added)
             </summary>
             <param name="bookInvDTO"></param>
             <returns></returns>
@@ -194,6 +181,47 @@
             This endpoint Deletes a Book Genre.
             </summary>
             <param name="ID"></param>
+            <returns></returns>
+        </member>
+        <member name="T:LM.API.Controllers.v1.TransactionController">
+            <summary>
+            This controller handles all Transactions processes of this application.
+            Issue, Return, User Borrow History etc.
+            </summary>
+        </member>
+        <member name="M:LM.API.Controllers.v1.TransactionController.#ctor(LM.Application.Interfaces.Services.ITransactionsService)">
+            <summary>
+            Constructor for dependency injections
+            </summary>
+            <param name="transactionsService"></param>
+        </member>
+        <member name="M:LM.API.Controllers.v1.TransactionController.IssueBook(System.Guid)">
+            <summary>
+            This endpoint Issues out Book to Customers.
+            </summary>
+            <param name="bookID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.TransactionController.ReturnBook(System.Guid)">
+            <summary>
+            This endpoint Records the returned Book from Customers.
+            </summary>
+            <param name="bookID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.TransactionController.UserOverAllHistory(LM.Domain.Common.ViewModel.pagiSearchVm)">
+            <summary>
+            This endpoint return Customers Book History Records.
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.TransactionController.UserOverAllHistory(LM.Domain.Common.ViewModel.pagiSearchVm,System.Guid)">
+            <summary>
+            This endpoint return Customers Book History Records Requested by Clients.
+            </summary>
+            <param name="model"></param>
+            <param name="userId"></param>
             <returns></returns>
         </member>
         <member name="T:LM.API.Program">

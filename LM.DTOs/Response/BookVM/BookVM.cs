@@ -1,5 +1,6 @@
 ﻿using LM.Domain.Entities;
 using LM.Domain.Enums;
+using LM.Domain.Enums.EnumExtension;
 using LM.DTOs.Response.BookGenresVM;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace LM.DTOs.Response.BookVM
 
         public int Quantity { get; set; }
 
-        public BookStatus AvailabilityStatus { get; set; }
+        public string AvailabilityStatus { get; set; }
 
         public static implicit operator BookVM(Book model)
         {
@@ -35,7 +36,7 @@ namespace LM.DTOs.Response.BookVM
                     ISBN = model.ISBN,
                     Description = model.Description,
                     Quantity = model.Quantity, 
-                    AvailabilityStatus = (model.Quantity > 0) ? BookStatus.InStock : BookStatus.OutOfStock
+                    AvailabilityStatus = (model.Quantity > 0) ? BookStatus.InStock.GetDescription() : BookStatus.OutOfStock.GetDescription()
                 };
         }
     }

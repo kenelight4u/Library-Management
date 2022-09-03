@@ -253,7 +253,7 @@ namespace LM.API.Controllers.v1
         }
 
         /// <summary>
-        /// This endpoint Updates staff Details on this application.
+        /// This endpoint Updates Users Details on this application.
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns> 

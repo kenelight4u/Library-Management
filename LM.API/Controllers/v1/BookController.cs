@@ -11,6 +11,7 @@ using LM.DTOs.Request.BookDTO;
 using LM.Domain.Utils.Pagination;
 using LM.DTOs.Response.BookGenresVM;
 using LM.DTOs.Response.BookVM;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LM.API.Controllers.v1
 {
@@ -18,6 +19,8 @@ namespace LM.API.Controllers.v1
     /// This controller handles all Book processes of this application.
     /// Registration, Update and all account verification of user.
     /// </summary>
+    [ApiVersion("1.0")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class BookController : BaseController
     {
         private readonly IBookService _bookService;
@@ -37,6 +40,7 @@ namespace LM.API.Controllers.v1
         /// <param name="bookGDTO"></param>
         /// <returns></returns>
         [HttpPost("Book")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "SuperAdmin")]
         [ProducesResponseType(typeof(ApiResponse<string>), 200)]
         public async Task<IActionResult> AddNewBook([FromBody] BookDTO bookGDTO)
         {
@@ -172,6 +176,7 @@ namespace LM.API.Controllers.v1
         /// <param name="bookDTO"></param>
         /// <returns></returns>
         [HttpPut("EditBook")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "SuperAdmin")]
         [ProducesResponseType(typeof(ApiResponse<string>), 200)]
         public async Task<IActionResult> EditABook([FromForm] EditBookDTO bookDTO)
         {
@@ -193,11 +198,12 @@ namespace LM.API.Controllers.v1
         }
 
         /// <summary>
-        /// This endpoint updates a Book Inventory Details
+        /// This endpoint updates a Book Inventory (quantity added)
         /// </summary>
         /// <param name="bookInvDTO"></param>
         /// <returns></returns>
         [HttpPut("UpdateInventory")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "SuperAdmin")]
         [ProducesResponseType(typeof(ApiResponse<string>), 200)]
         public async Task<IActionResult> UpdateInventory([FromForm] BookInventoryUpdateDTO bookInvDTO)
         {
@@ -224,6 +230,7 @@ namespace LM.API.Controllers.v1
         /// <param name="ID"></param>
         /// <returns></returns>
         [HttpDelete()]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "SuperAdmin")]
         [ProducesResponseType(typeof(ApiResponse<string>), 200)]
         public async Task<IActionResult> DeleteBook([FromQuery] Guid ID)
         {
