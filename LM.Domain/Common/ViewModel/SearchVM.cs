@@ -63,4 +63,33 @@ namespace LM.Domain.Common.ViewModel
         public string FilterColumn { get; set; }
 
     }
+
+    public class pagiSearchVm
+    {
+        /// <summary>
+        /// Gets or sets the index of the page.
+        /// </summary>
+        /// <value>The index of the page.</value>
+        [Range(1, int.MaxValue, ErrorMessage = "PageIndex must be greater than 0")]
+        public int PageIndex { get; set; } = CoreConstants.PaginationConsts.PageIndex;
+
+        /// <summary>
+        /// Gets or sets the page total.
+        /// </summary>
+        /// <value>The page total.</value>
+        public int? PageTotal { get; set; }
+
+        /// <summary>
+        /// Gets or sets the size of the page.
+        /// </summary>
+        /// <value>The size of the page.</value>
+        [Range(1, int.MaxValue, ErrorMessage = "PageSize must be greater than 0")]
+        public int PageSize { get; set; } = 10;
+
+        /// <summary>
+        /// Gets the page skip.
+        /// </summary>
+        /// <value>The page skip.</value>
+        public int PageSkip => (PageIndex - 1) * PageSize;
+    }
 }
