@@ -13,6 +13,7 @@ using LM.DTOs.Response.BookGenresVM;
 using LM.DTOs.Response.BookVM;
 using Microsoft.AspNetCore.Authorization;
 using LM.DTOs.Response;
+using LM.Domain.Utils;
 
 namespace LM.API.Controllers.v1
 {
@@ -45,7 +46,7 @@ namespace LM.API.Controllers.v1
         /// <param name="bookGDTO"></param>
         /// <returns></returns>
         [HttpPost("Book")]
-        [Authorize(AuthenticationSchemes = "Bearer", Roles = "SuperAdmin")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = CoreConstants.SuperAdmin)]
         [ProducesResponseType(typeof(ApiResponse<Guid>), 200)]
         public async Task<IActionResult> AddNewBook([FromBody] BookDTO bookGDTO)
         {
@@ -180,7 +181,7 @@ namespace LM.API.Controllers.v1
         /// <param name="bookID"></param>
         /// <returns></returns>
         [HttpPost("Borrow")]
-        [Authorize(AuthenticationSchemes = "Bearer", Roles = "SuperAdmin, Customers")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = CoreConstants.SuperAdmin + " , " + CoreConstants.Customer)]
         [ProducesResponseType(typeof(ApiResponse<IssueBookVm>), 200)]
         public async Task<IActionResult> IssueBook([FromQuery] Guid bookID)
         {
@@ -208,7 +209,7 @@ namespace LM.API.Controllers.v1
         /// <param name="bookID"></param>
         /// <returns></returns>
         [HttpPost("Return")]
-        [Authorize(AuthenticationSchemes = "Bearer", Roles = "SuperAdmin, Customers")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = CoreConstants.SuperAdmin + " , " + CoreConstants.Customer)]
         [ProducesResponseType(typeof(ApiResponse<returnBookVm>), 200)]
         public async Task<IActionResult> ReturnBook([FromQuery] Guid bookID)
         {
@@ -236,7 +237,7 @@ namespace LM.API.Controllers.v1
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpGet("History")]
-        [Authorize(AuthenticationSchemes = "Bearer", Roles = "SuperAdmin, Customers")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = CoreConstants.SuperAdmin + " , " + CoreConstants.Customer)]
         [ProducesResponseType(typeof(ApiResponse<PagedList<BookHistoryVM>>), 200)]
         public async Task<IActionResult> UserOverAllHistory([FromQuery] pagiSearchVm model)
         {
@@ -265,7 +266,7 @@ namespace LM.API.Controllers.v1
         /// <param name="userId"></param>
         /// <returns></returns>
         [HttpGet("History/UserID")]
-        [Authorize(AuthenticationSchemes = "Bearer", Roles = "SuperAdmin, Clients")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = CoreConstants.SuperAdmin + " , " + CoreConstants.Client)]
         [ProducesResponseType(typeof(ApiResponse<PagedList<BookHistoryVM>>), 200)]
         public async Task<IActionResult> UserOverAllHistory([FromQuery] pagiSearchVm model, Guid userId)
         {
@@ -320,7 +321,7 @@ namespace LM.API.Controllers.v1
         /// <param name="bookDTO"></param>
         /// <returns></returns>
         [HttpPut("EditBook")]
-        [Authorize(AuthenticationSchemes = "Bearer", Roles = "SuperAdmin")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = CoreConstants.SuperAdmin)]
         [ProducesResponseType(typeof(ApiResponse<string>), 200)]
         public async Task<IActionResult> EditABook([FromForm] EditBookDTO bookDTO)
         {
@@ -347,7 +348,7 @@ namespace LM.API.Controllers.v1
         /// <param name="bookInvDTO"></param>
         /// <returns></returns>
         [HttpPut("UpdateInventory")]
-        [Authorize(AuthenticationSchemes = "Bearer", Roles = "SuperAdmin")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = CoreConstants.SuperAdmin)]
         [ProducesResponseType(typeof(ApiResponse<string>), 200)]
         public async Task<IActionResult> UpdateInventory([FromForm] BookInventoryUpdateDTO bookInvDTO)
         {
@@ -374,7 +375,7 @@ namespace LM.API.Controllers.v1
         /// <param name="ID"></param>
         /// <returns></returns>
         [HttpDelete()]
-        [Authorize(AuthenticationSchemes = "Bearer", Roles = "SuperAdmin")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = CoreConstants.SuperAdmin)]
         [ProducesResponseType(typeof(ApiResponse<string>), 200)]
         public async Task<IActionResult> DeleteBook([FromQuery] Guid ID)
         {
