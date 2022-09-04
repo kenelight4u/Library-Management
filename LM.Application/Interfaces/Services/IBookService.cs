@@ -11,7 +11,7 @@ namespace LM.Application.Interfaces.Services
     public interface IBookService
     {
         #region Books
-        Task<ResultModel<string>> AddNewBook(BookDTO bookGDTO);
+        Task<ResultModel<Guid>> AddNewBook(BookDTO bookGDTO);
 
         Task<ResultModel<PagedList<BookVM>>> GetAllBooks(SearchVM model);
 

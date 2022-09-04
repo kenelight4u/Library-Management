@@ -1,4 +1,5 @@
 ﻿using LM.Domain.Entities;
+using LM.Domain.Utils;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -40,7 +41,7 @@ namespace LM.Persistence.DataInitializer
                 IdentityResult result = userManager.CreateAsync(user, "Admin_4Lm").Result;
                 if (result.Succeeded)
                 {
-                    userManager.AddToRoleAsync(user, "SuperAdmin").Wait();
+                    userManager.AddToRoleAsync(user, CoreConstants.SuperAdmin).Wait();
                 }
             }
 
@@ -52,25 +53,25 @@ namespace LM.Persistence.DataInitializer
         /// <param name="roleManager"></param>
         private static void SeedRoles(RoleManager<IdentityRole> roleManager)
         {
-            if (!roleManager.RoleExistsAsync("SuperAdmin").Result)
+            if (!roleManager.RoleExistsAsync(CoreConstants.SuperAdmin).Result)
             {
                 IdentityRole role = new IdentityRole();
-                role.Name = "SuperAdmin";
+                role.Name = CoreConstants.SuperAdmin;
                 IdentityResult roleResult = roleManager.CreateAsync(role).Result;
             }
 
 
-            if (!roleManager.RoleExistsAsync("Customers").Result)
+            if (!roleManager.RoleExistsAsync(CoreConstants.Customer).Result)
             {
                 IdentityRole role = new IdentityRole();
-                role.Name = "Customers";
+                role.Name = CoreConstants.Customer;
                 IdentityResult roleResult = roleManager.CreateAsync(role).Result;
             }
 
-            if (!roleManager.RoleExistsAsync("Clients").Result)
+            if (!roleManager.RoleExistsAsync(CoreConstants.Client).Result)
             {
                 IdentityRole role = new IdentityRole();
-                role.Name = "Clients";
+                role.Name = CoreConstants.Client;
                 IdentityResult roleResult = roleManager.CreateAsync(role).Result;
             }
 

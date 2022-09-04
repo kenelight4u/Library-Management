@@ -23,6 +23,7 @@ using Microsoft.IdentityModel.Tokens;
 using LM.Domain.Entities;
 using LM.Persistence.Context;
 using LM.Application.Helpers;
+using LM.Domain.Utils;
 
 namespace LM.API
 {
@@ -54,7 +55,7 @@ namespace LM.API
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequireLoggedIn",
-                    policy => policy.RequireRole("SuperAdmin", "Customers", "Clients").RequireAuthenticatedUser());
+                    policy => policy.RequireRole(CoreConstants.SuperAdmin, CoreConstants.Customer, CoreConstants.Client).RequireAuthenticatedUser());
             });
 
             services.Configure<DataProtectionTokenProviderOptions>(d => d.TokenLifespan = TimeSpan.FromMinutes(10));
@@ -98,9 +99,9 @@ namespace LM.API
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("RequireSuperAdmin", policy => policy.RequireRole("SuperAdmin").RequireAuthenticatedUser());
-                options.AddPolicy("RequireCustomers", policy => policy.RequireRole("Customers").RequireAuthenticatedUser());
-                options.AddPolicy("RequireClients", policy => policy.RequireRole("Clients").RequireAuthenticatedUser());
+                options.AddPolicy(CoreConstants.RequireSuperAdmin, policy => policy.RequireRole(CoreConstants.SuperAdmin).RequireAuthenticatedUser());
+                options.AddPolicy(CoreConstants.RequireCustomers, policy => policy.RequireRole(CoreConstants.Customer).RequireAuthenticatedUser());
+                options.AddPolicy(CoreConstants.RequireClients, policy => policy.RequireRole(CoreConstants.Client).RequireAuthenticatedUser());
                 //options.FallbackPolicy = new AuthorizationPolicyBuilder()
                 //.RequireAuthenticatedUser()
                 //.Build();

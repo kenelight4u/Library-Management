@@ -13,17 +13,27 @@ namespace LM.Domain.Utils
     public abstract class CoreConstants
     {
         /// <summary>
-        /// The date format
+        /// The Require Customers
         /// </summary>
-        public const string DateFormat = "dd MMMM, yyyy";
+        public const string RequireCustomers = "RequireCustomers";
         /// <summary>
-        /// The time format
+        /// The Require Clients
         /// </summary>
-        public const string TimeFormat = "hh:mm tt";
+        public const string RequireClients = "RequireClients";
         /// <summary>
-        /// The system date format
+        /// The SuperAdmin
         /// </summary>
-        public const string SystemDateFormat = "dd/MM/yyyy";
+        public const string SuperAdmin = "SuperAdmin";
+
+        /// <summary>
+        /// The SuperAdmin
+        /// </summary>
+        public const string Customer = "Customer";
+
+        /// <summary>
+        /// The SuperAdmin
+        /// </summary>
+        public const string Client = "Client";
         /// <summary>
         /// The permission
         /// </summary>
@@ -32,6 +42,11 @@ namespace LM.Domain.Utils
         /// The role
         /// </summary>
         public const string Role = "role";
+
+        /// <summary>
+        /// The policy name 
+        /// </summary>
+        public const string RequireSuperAdmin = "RequireSuperAdmin";
 
         /// <summary>
         /// The UserIdKey

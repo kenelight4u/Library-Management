@@ -19,4 +19,19 @@ namespace LM.DTOs.Response
 
         public string UserFullName { get; set; }
     }
+
+    public class BookHistVm
+    {
+        public string ISBN { get; set; }
+
+        public string Title { get; set; }
+
+        public String BookStatus { get; set; }
+
+        public string IssuedDate { get; set; }
+
+        public string ReturnedDate { get; set; }
+
+        public string UserFullName { get; set; }
+    }
 }

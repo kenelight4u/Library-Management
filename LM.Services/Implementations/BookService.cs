@@ -69,19 +69,19 @@ namespace LM.Services.Implementations
         /// </summary>
         /// <param name="bookGDTO"></param>
         /// <returns></returns>
-        public async Task<ResultModel<string>> AddNewBook(BookDTO bookGDTO)
+        public async Task<ResultModel<Guid>> AddNewBook(BookDTO bookGDTO)
         {
             var userId = _contextAccessor.GetCurrentUserId();
 
             var bookGenre = await GetBookGenreByID(bookGDTO.BookGenresId);
 
             if (bookGenre is null)
-                return new ResultModel<string>($"Book Genre with ID: {bookGenre.ID} Not Found");
+                return new ResultModel<Guid>($"Book Genre with ID: {bookGenre.ID} Not Found");
                
             var book = await GetBookByISBN(bookGDTO.ISBN);
 
             if (book is not null)
-                return new ResultModel<string>($"Book with ISBN: {bookGDTO.ISBN} Exists");
+                return new ResultModel<Guid>($"Book with ISBN: {bookGDTO.ISBN} Exists");
 
             var newBook = new Book
             {
@@ -114,7 +114,7 @@ namespace LM.Services.Implementations
 
             await _unitOfWork.SaveChangesAsync();
 
-            return new ResultModel<string> { Data = "Success", Message = "Book Created Successfully" };
+            return new ResultModel<Guid> { Data = newBook.ID, Message = "Book Created Successfully" };
         }
 
         public async Task<ResultModel<string>> DeleteABook(Guid ID)

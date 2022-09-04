@@ -64,7 +64,7 @@ namespace LM.API.Controllers.v1
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpGet()]
+        [HttpGet("BookGenres")]
         [ProducesResponseType(typeof(ApiResponse<PagedList<BookGenresVM>>), 200)]
         public async Task<IActionResult> GetAllBooksGenres([FromQuery] SearchVM model)
         {
@@ -91,7 +91,7 @@ namespace LM.API.Controllers.v1
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        [HttpGet("BookGenre")]
+        [HttpGet("ID")]
         [ProducesResponseType(typeof(ApiResponse<BookGenresVM>), 200)]
         public async Task<IActionResult> GetABooksGenres([FromQuery] Guid ID)
         {

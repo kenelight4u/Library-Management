@@ -48,7 +48,7 @@ namespace LM.Test.ControllerTests.BookControllerTest
                 ISBN = "6789567",
             };
 
-            var resultModel = new ResultModel<string>();
+            var resultModel = new ResultModel<Guid>();
             _fac.BookService.Setup(x => x.AddNewBook(It.IsAny<BookDTO>()))
                 .Returns(Task.FromResult(resultModel));
 
@@ -68,7 +68,7 @@ namespace LM.Test.ControllerTests.BookControllerTest
 
             var model = new BookDTO() {};
 
-            var resultModel = new ResultModel<string>("Error Occured");
+            var resultModel = new ResultModel<Guid>("Error Occured");
             _fac.BookService.Setup(x => x.AddNewBook(It.IsAny<BookDTO>()))
                 .Returns(Task.FromResult(resultModel));
 
