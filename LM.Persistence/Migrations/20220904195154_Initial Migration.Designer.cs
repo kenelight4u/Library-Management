@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LM.Persistence.Migrations
 {
     [DbContext(typeof(LibraryManagementDbContext))]
-    [Migration("20220904185440_Initial Migration")]
+    [Migration("20220904195154_Initial Migration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,7 +43,7 @@ namespace LM.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ISBN")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("LastModificationTime")
                         .HasColumnType("datetime2");
@@ -58,7 +58,49 @@ namespace LM.Persistence.Migrations
 
                     b.HasIndex("BookGenresId");
 
-                    b.ToTable("Books");
+                    b.HasIndex("ISBN")
+                        .IsUnique()
+                        .HasFilter("[ISBN] IS NOT NULL");
+
+                    b.ToTable("Book");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = new Guid("5ee58416-76d4-4bad-852e-dc2ed486e482"),
+                            Author = " Gabriel Garcia Marquez ",
+                            BookGenresId = new Guid("d6b44d21-d94b-4716-acaa-f26a6328fa0b"),
+                            CreationTime = new DateTime(2022, 9, 4, 20, 51, 51, 625, DateTimeKind.Local).AddTicks(9076),
+                            CreatorUserId = "473c9df0-2634-4506-ad6c-9b98336082f2",
+                            Description = "One Hundred Years of Solitude is the first piece of literature since the Book of Genesis that should be required reading for the entire human race. . . . Mr. Garcia Marquez has done nothing less than to create in the reader a sense of all that is profound, meaningful, and meaningless in life.",
+                            ISBN = "978-3-16-148410-0",
+                            Quantity = 4,
+                            Title = "One Hundred Years of Solitude"
+                        },
+                        new
+                        {
+                            ID = new Guid("7969a9ac-c081-4b75-a7fc-51e64c79c8dc"),
+                            Author = "Alan Moore",
+                            BookGenresId = new Guid("8bea3613-18a2-4bd6-a8a3-6e34ce4881f3"),
+                            CreationTime = new DateTime(2022, 9, 4, 20, 51, 51, 625, DateTimeKind.Local).AddTicks(9113),
+                            CreatorUserId = "473c9df0-2634-4506-ad6c-9b98336082f2",
+                            Description = "A hit HBO original series, Watchmen, the groundbreaking series from award-winning author Alan Moore, presents a world where the mere presence of American superheroes changed history--the U.S. won the Vietnam War, Nixon is still president, and the Cold War is in full effect.",
+                            ISBN = "978-3-16-148410-1",
+                            Quantity = 2,
+                            Title = "Watchmen "
+                        },
+                        new
+                        {
+                            ID = new Guid("13088fc2-c0ee-487e-91a1-2b977214d0a1"),
+                            Author = "Alan Moore",
+                            BookGenresId = new Guid("f07f8895-b747-459d-ceb1-85f77c5e7d67"),
+                            CreationTime = new DateTime(2022, 9, 4, 20, 51, 51, 625, DateTimeKind.Local).AddTicks(9117),
+                            CreatorUserId = "473c9df0-2634-4506-ad6c-9b98336082f2",
+                            Description = "After the sinking of a cargo ship, a solitary lifeboat remains bobbing on the wild blue Pacific. The only survivors from the wreck are a sixteen-year-old boy named Pi, a hyena, a wounded zebra, an orangutan—and a 450-pound Royal Bengal tiger.\r\n\r\nSoon the tiger has dispatched all but Pi Patel, whose fear, knowledge, and cunning allow him to coexist with the tiger, Richard Parker, for 227 days while lost at sea. When they finally reach the coast of Mexico, Richard Parker flees to the jungle, never to be seen again. The Japanese authorities who interrogate Pi refuse to believe his story and press him to tell them \"the truth.\" After hours of coercion, Pi tells a second story, a story much less fantastical, much more conventional—but is it more true?\r\n\r\n\"A story to make you believe in the soul-sustaining power of fiction.\"—Los Angeles Times Book Review\r\n",
+                            ISBN = "978-3-16-148410-2",
+                            Quantity = 3,
+                            Title = "Life Of Pi Paperback"
+                        });
                 });
 
             modelBuilder.Entity("LM.Domain.Entities.BookGenres", b =>
@@ -85,6 +127,32 @@ namespace LM.Persistence.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("BookGenres");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = new Guid("d6b44d21-d94b-4716-acaa-f26a6328fa0b"),
+                            CreationTime = new DateTime(2022, 9, 4, 20, 51, 51, 623, DateTimeKind.Local).AddTicks(490),
+                            CreatorUserId = "473c9df0-2634-4506-ad6c-9b98336082f2",
+                            Description = "These books are based in a time period set in the past decades, often against the backdrop of significant (real) historical events.",
+                            Name = "Historical Fiction"
+                        },
+                        new
+                        {
+                            ID = new Guid("8bea3613-18a2-4bd6-a8a3-6e34ce4881f3"),
+                            CreationTime = new DateTime(2022, 9, 4, 20, 51, 51, 623, DateTimeKind.Local).AddTicks(4360),
+                            CreatorUserId = "473c9df0-2634-4506-ad6c-9b98336082f2",
+                            Description = "The plot always revolves around a crime of sorts that must be solved—or foiled—by the protagonists.",
+                            Name = "Detective and Mystery"
+                        },
+                        new
+                        {
+                            ID = new Guid("f07f8895-b747-459d-ceb1-85f77c5e7d67"),
+                            CreationTime = new DateTime(2022, 9, 4, 20, 51, 51, 623, DateTimeKind.Local).AddTicks(4378),
+                            CreatorUserId = "473c9df0-2634-4506-ad6c-9b98336082f2",
+                            Description = "The stories in comic books and graphic novels are presented to the reader through engaging, sequential narrative art (illustrations and typography) that's either presented in a specific design or the traditional panel layout you find in comics. With both, you'll often find the dialogue presented in the tell-tale \"word balloons\" next to the respective characters.",
+                            Name = "Comic Book or Graphic Novel"
+                        });
                 });
 
             modelBuilder.Entity("LM.Domain.Entities.BookHistory", b =>
@@ -151,7 +219,33 @@ namespace LM.Persistence.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("BookInventories");
+                    b.ToTable("BookInventory");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = new Guid("8ec05cfa-11e5-4f32-b732-dbd3a953b20b"),
+                            BookId = new Guid("5ee58416-76d4-4bad-852e-dc2ed486e482"),
+                            CreationTime = new DateTime(2022, 9, 4, 20, 51, 51, 624, DateTimeKind.Local).AddTicks(8661),
+                            CreatorUserId = "473c9df0-2634-4506-ad6c-9b98336082f2",
+                            Quantity = 4
+                        },
+                        new
+                        {
+                            ID = new Guid("536a1a94-c132-4163-bee5-2d0e1986882a"),
+                            BookId = new Guid("7969a9ac-c081-4b75-a7fc-51e64c79c8dc"),
+                            CreationTime = new DateTime(2022, 9, 4, 20, 51, 51, 624, DateTimeKind.Local).AddTicks(8698),
+                            CreatorUserId = "473c9df0-2634-4506-ad6c-9b98336082f2",
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            ID = new Guid("13b5ce77-b382-45b6-bff4-300bb8b93388"),
+                            BookId = new Guid("13088fc2-c0ee-487e-91a1-2b977214d0a1"),
+                            CreationTime = new DateTime(2022, 9, 4, 20, 51, 51, 624, DateTimeKind.Local).AddTicks(8702),
+                            CreatorUserId = "473c9df0-2634-4506-ad6c-9b98336082f2",
+                            Quantity = 3
+                        });
                 });
 
             modelBuilder.Entity("LM.Domain.Entities.LMUser", b =>

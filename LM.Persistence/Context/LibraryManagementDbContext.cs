@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace LM.Persistence.Context
 {
@@ -26,5 +27,15 @@ namespace LM.Persistence.Context
         public DbSet<BookGenres> BookGenres { get; set; }
 
         public DbSet<BookInventory> BookInventories { get; set; }
+
+        /// <summary>
+        /// Helps to seed Data in the Database
+        /// </summary>
+        /// <param name="builder"></param>
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        }
     }
 }
