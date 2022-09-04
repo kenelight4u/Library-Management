@@ -20,9 +20,9 @@ namespace LM.Persistence.Implementation
         }
         public IRepository<T> DataStore => store ??= new Repository<T>(context);
 
-        public async Task<int> SaveChanges()
-        {
-            return await context.SaveChangesAsync();
-        }
+        //public async Task<int> SaveChanges()
+        //{
+        //    return await context.SaveChangesAsync();
+        //}
     }
 }

@@ -1,4 +1,5 @@
 ﻿using LM.Application.Interfaces.Persistence;
+using LM.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,9 @@ namespace LM.Persistence.Implementation
         /// <summary>
         /// The context
         /// </summary>
-        public readonly DbContext _context;
+        //public readonly DbContext _context;
+
+        protected readonly LibraryManagementDbContext _context;
 
         /// <summary>
         /// The disposed
@@ -30,7 +33,7 @@ namespace LM.Persistence.Implementation
         /// Initializes a new instance of the <see cref="EfCoreUnitOfWork"/> class.
         /// </summary>
         /// <param name="context">The context.</param>
-        public EfCoreUnitOfWork(DbContext context)
+        public EfCoreUnitOfWork(LibraryManagementDbContext context)
         {
             _context = context;
         }
@@ -109,7 +112,7 @@ namespace LM.Persistence.Implementation
         /// <typeparam name="TDbContext">The type of the t database context.</typeparam>
         /// <returns>TDbContext.</returns>
         public virtual TDbContext GetOrCreateDbContext<TDbContext>()
-            where TDbContext : DbContext
+            where TDbContext : LibraryManagementDbContext
         {
             return (TDbContext)_context;
         }

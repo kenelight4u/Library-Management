@@ -25,17 +25,20 @@ namespace LM.Services.Implementations
         private readonly IStoreManager<Book> _book;
         private readonly IStoreManager<BookHistory> _bookHistory;
         private readonly UserManager<LMUser> _userManager;
+        private readonly IUnitOfWork _unitOfWork;
 
         public TransactionsService(
             IContextAccessor contextAccessor,
             IStoreManager<Book> book,
             IStoreManager<BookHistory> bookHistory,
-            UserManager<LMUser> userManager)
+            UserManager<LMUser> userManager,
+            IUnitOfWork unitOfWork)
         {
             this._contextAccessor = contextAccessor;
             this._book = book;
             this._bookHistory = bookHistory;
             this._userManager = userManager;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<ResultModel<IssueBookVm>> IssueBook(Guid bookID)
@@ -71,12 +74,14 @@ namespace LM.Services.Implementations
             };
 
             await _bookHistory.DataStore.Add(issueBook);
-            await _bookHistory.SaveChanges();
+            //await _bookHistory.SaveChanges();
 
             book.Quantity--;
 
             _book.DataStore.Update(book);
-            await _book.SaveChanges();
+            // await _book.SaveChanges();
+
+            await _unitOfWork.SaveChangesAsync();
 
             response.BookDetails = book;
             response.ExpectedReturnDate = DateTimeExtention.AddBusinessDays(DateTime.Now, 14).ToLongDateString();
@@ -106,12 +111,14 @@ namespace LM.Services.Implementations
             bookHistory.ReturnedDate = DateTime.Now;
             
             _bookHistory.DataStore.Update(bookHistory);
-            await _bookHistory.SaveChanges();
+            //await _bookHistory.SaveChanges();
 
             book.Quantity++;
 
             _book.DataStore.Update(book);
-            await _bookHistory.SaveChanges();
+            //await _bookHistory.SaveChanges();
+
+            await _unitOfWork.SaveChangesAsync();
 
             var numberOfworkingDays = DateTimeExtention.GetWorkingDays(bookHistory.IssuedDate, DateTime.Now);
 

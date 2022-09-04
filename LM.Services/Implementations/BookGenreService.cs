@@ -20,13 +20,15 @@ namespace LM.Services.Implementations
     {
         private readonly IContextAccessor _contextAccessor;
         private readonly IStoreManager<BookGenres> _bookGenre;
-
+        private readonly IUnitOfWork _unitOfWork;
         public BookGenreService(
             IStoreManager<BookGenres> bookGenre,
-            IContextAccessor contextAccessor)
+            IContextAccessor contextAccessor,
+            IUnitOfWork unitOfWork)
         {
             this._bookGenre = bookGenre;
             this._contextAccessor = contextAccessor;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<ResultModel<string>> AddBookGenre(BookGenresDTO bookGenresDTO)
@@ -54,7 +56,8 @@ namespace LM.Services.Implementations
             };
 
             await _bookGenre.DataStore.Add(newBookGenre);
-            await _bookGenre.SaveChanges();
+            //await _bookGenre.SaveChanges();
+            await _unitOfWork.SaveChangesAsync();
 
             return new ResultModel<string> { Data = "Success", Message = "Book Genre Created Successfully" };
         }
@@ -63,7 +66,8 @@ namespace LM.Services.Implementations
         {
             var isDeleted = await _bookGenre.DataStore.Delete(ID);
 
-            await _bookGenre.SaveChanges();
+            //await _bookGenre.SaveChanges();
+            await _unitOfWork.SaveChangesAsync();
 
             if (isDeleted)
                 return new ResultModel<string> { Data = "Success", Message = $"Book Genre with ID: {ID} Deleted Successful" };
@@ -95,7 +99,8 @@ namespace LM.Services.Implementations
             bookGenre.Description = bookGenresDTO.Description is null ? bookGenre.Description : bookGenresDTO.Description;
 
             _bookGenre.DataStore.Update(bookGenre);
-            await _bookGenre.SaveChanges();
+            //await _bookGenre.SaveChanges();
+            await _unitOfWork.SaveChangesAsync();
 
             return new ResultModel<string> { Data = "Success", Message = "Book Genre Updated Successfully" };
         }
