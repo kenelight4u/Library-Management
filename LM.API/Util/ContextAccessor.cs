@@ -6,6 +6,9 @@ using System.Security.Claims;
 
 namespace LM.API.Util
 {
+    /// <summary>
+    /// The Context Accessor Class
+    /// </summary>
     public class ContextAccessor : IContextAccessor
     {
         private readonly IHttpContextAccessor _contextAccessor;
