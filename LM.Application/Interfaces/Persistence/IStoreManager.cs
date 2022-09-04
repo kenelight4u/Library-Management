@@ -19,10 +19,10 @@ namespace LM.Application.Interfaces.Persistence
         /// </summary>
         IRepository<T> DataStore { get; }
 
-        /// <summary>
-        /// This saves all changes made to the currently staged context.
-        /// </summary>
-        /// <returns></returns>
-        Task<int> SaveChanges();
+        ///// <summary>
+        ///// This saves all changes made to the currently staged context.
+        ///// </summary>
+        ///// <returns></returns>
+        //Task<int> SaveChanges();
     }
 }

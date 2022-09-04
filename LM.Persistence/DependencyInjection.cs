@@ -34,7 +34,7 @@ namespace LM.Persistence
                     .MigrationsAssembly(typeof(LibraryManagementDbContext).Assembly.FullName)));
 
             services.AddScoped(typeof(IStoreManager<>), typeof(StoreManager<>));
-            //services.AddScoped(typeof(IUnitOfWork), typeof(EfCoreUnitOfWork));
+            services.AddScoped(typeof(IUnitOfWork), typeof(EfCoreUnitOfWork));
 
             services.AddScoped<IBookGenresService, BookGenreService>();
             services.AddScoped<IBookService, BookService>();

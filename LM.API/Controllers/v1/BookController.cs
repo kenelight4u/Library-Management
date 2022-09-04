@@ -136,7 +136,6 @@ namespace LM.API.Controllers.v1
 
                 return ApiResponse(message: result.Message, codes: ApiResponseCodes.NOT_FOUND, data: false, totalCount: 0, errors: result.GetErrorMessages().ToArray());
             }
-
             catch (Exception ex)
             {
                 return HandleError(ex);

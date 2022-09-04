@@ -21,23 +21,54 @@ namespace LM.Services.Implementations
 {
     public class BookService : IBookService
     {
+        /// <summary>
+        /// The Context Accessor
+        /// </summary>
         private readonly IContextAccessor _contextAccessor;
+        /// <summary>
+        /// The Book Genres Repository
+        /// </summary>
         private readonly IStoreManager<BookGenres> _bookGenre;
+        /// <summary>
+        /// The Book Repository
+        /// </summary>
         private readonly IStoreManager<Book> _book;
+        /// <summary>
+        /// The Book Inventory repository
+        /// </summary>
         private readonly IStoreManager<BookInventory> _bookInv;
+        /// <summary>
+        /// The unit of work
+        /// </summary>
+        private readonly IUnitOfWork _unitOfWork;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BookService"/> class.
+        /// </summary>
+        /// <param name="contextAccessor"></param>
+        /// <param name="bookInv"></param>
+        /// <param name="book"></param>
+        /// <param name="bookGenre"></param>
+        /// <param name="unitOfWork"></param>
         public BookService(
             IContextAccessor contextAccessor,
             IStoreManager<BookInventory> bookInv,
             IStoreManager<Book> book,
-            IStoreManager<BookGenres> bookGenre)
+            IStoreManager<BookGenres> bookGenre,
+            IUnitOfWork unitOfWork)
         {
             this._book = book;
             this._bookInv = bookInv;
             this._contextAccessor = contextAccessor;
             this._bookGenre = bookGenre;
+            this._unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// Create a Book
+        /// </summary>
+        /// <param name="bookGDTO"></param>
+        /// <returns></returns>
         public async Task<ResultModel<string>> AddNewBook(BookDTO bookGDTO)
         {
             var userId = _contextAccessor.GetCurrentUserId();
@@ -66,7 +97,8 @@ namespace LM.Services.Implementations
             };
 
             await _book.DataStore.Add(newBook);
-            await _bookGenre.SaveChanges();
+            //await _bookGenre.SaveChanges();
+            
 
             var newBookInv = new BookInventory
             {
@@ -78,7 +110,9 @@ namespace LM.Services.Implementations
             };
 
             await _bookInv.DataStore.Add(newBookInv);
-            await _bookInv.SaveChanges();
+            //await _bookInv.SaveChanges();
+
+            await _unitOfWork.SaveChangesAsync();
 
             return new ResultModel<string> { Data = "Success", Message = "Book Created Successfully" };
         }
@@ -87,7 +121,8 @@ namespace LM.Services.Implementations
         {
             var isDeleted = await _book.DataStore.Delete(ID);
 
-            await _book.SaveChanges();
+            //await _book.SaveChanges();
+            await _unitOfWork.SaveChangesAsync();
 
             if (isDeleted)
                 return new ResultModel<string> { Data = "Success", Message = $"Book with ID: {ID} Deleted Successful" };
@@ -123,7 +158,8 @@ namespace LM.Services.Implementations
             book.Description = bookGDTO.Description is null ? book.Description : bookGDTO.Description;
 
             _book.DataStore.Update(book);
-            await _book.SaveChanges();
+            //await _book.SaveChanges();
+            await _unitOfWork.SaveChangesAsync();
 
             return new ResultModel<string> { Data = "Success", Message = "Book Updated Successfully" };
         }
@@ -179,10 +215,12 @@ namespace LM.Services.Implementations
             bookInv.Quantity += bookInvDTO.Quantity;
 
             _book.DataStore.Update(book);
-            await _book.SaveChanges();
+           // await _book.SaveChanges();
 
             _bookInv.DataStore.Update(bookInv);
-            await _bookInv.SaveChanges();
+           // await _bookInv.SaveChanges();
+
+            await _unitOfWork.SaveChangesAsync();
 
             return new ResultModel<string> { Data = "Success", Message = "Book Quantity Updated Successfully" };
         }

@@ -31,7 +31,6 @@ namespace LM.API.Controllers.v1
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _config;
         private readonly IContextAccessor _contextAccessor;
-        private readonly IWebHostEnvironment _env;
 
         /// <summary>
         /// Constructor for dependency injections
@@ -41,21 +40,18 @@ namespace LM.API.Controllers.v1
         /// <param name="roleManager"></param>
         /// <param name="config"></param>
         /// <param name="contextAccessor"></param>
-        /// <param name="env"></param>
         public AuthController(
             UserManager<LMUser> userManager,
             SignInManager<LMUser> signInManager,
             RoleManager<IdentityRole> roleManager,
             IConfiguration config,
-            IContextAccessor contextAccessor,
-            IWebHostEnvironment env)
+            IContextAccessor contextAccessor)
         {
             this._userManager = userManager;
             this._signInManager = signInManager;
             this._roleManager = roleManager;
             this._config = config;
             this._contextAccessor = contextAccessor;
-            this._env = env;
         }
 
         /// <summary>

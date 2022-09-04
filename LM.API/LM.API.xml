@@ -10,7 +10,7 @@
             Registration, Update and all account verification of user.
             </summary>
         </member>
-        <member name="M:LM.API.Controllers.v1.AuthController.#ctor(Microsoft.AspNetCore.Identity.UserManager{LM.Domain.Entities.LMUser},Microsoft.AspNetCore.Identity.SignInManager{LM.Domain.Entities.LMUser},Microsoft.AspNetCore.Identity.RoleManager{Microsoft.AspNetCore.Identity.IdentityRole},Microsoft.Extensions.Configuration.IConfiguration,LM.Application.Interfaces.Utilities.IContextAccessor,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+        <member name="M:LM.API.Controllers.v1.AuthController.#ctor(Microsoft.AspNetCore.Identity.UserManager{LM.Domain.Entities.LMUser},Microsoft.AspNetCore.Identity.SignInManager{LM.Domain.Entities.LMUser},Microsoft.AspNetCore.Identity.RoleManager{Microsoft.AspNetCore.Identity.IdentityRole},Microsoft.Extensions.Configuration.IConfiguration,LM.Application.Interfaces.Utilities.IContextAccessor)">
             <summary>
             Constructor for dependency injections
             </summary>
@@ -19,7 +19,6 @@
             <param name="roleManager"></param>
             <param name="config"></param>
             <param name="contextAccessor"></param>
-            <param name="env"></param>
         </member>
         <member name="M:LM.API.Controllers.v1.AuthController.SignUp(LM.DTOs.Request.AuthDTO.SignUpDTO)">
             <summary>
@@ -270,6 +269,11 @@
             </summary>
             <param name="app"></param>
             <param name="env"></param>
+        </member>
+        <member name="T:LM.API.Util.ContextAccessor">
+            <summary>
+            The Context Accessor Class
+            </summary>
         </member>
         <member name="M:LM.API.Util.ContextAccessor.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor)">
             <summary>
