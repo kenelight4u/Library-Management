@@ -23,6 +23,8 @@ namespace LM.Application.Interfaces.Services
 
         Task<ResultModel<PagedList<BookHistoryVM>>> UserOverAllHistory(pagiSearchVm model, Guid userId);
 
+        Task<ResultModel<PagedList<BookHistVm>>> BookOverAllHistory(pagiSearchVm model, Guid bookID);
+
         #endregion
     }
 }

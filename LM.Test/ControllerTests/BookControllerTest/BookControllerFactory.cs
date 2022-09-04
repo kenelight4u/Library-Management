@@ -13,10 +13,12 @@ namespace LM.Test.ControllerTests.BookControllerTest
     public class BookControllerFactory
     {
         public Mock<IBookService> BookService = new Mock<IBookService>();
+        public Mock<ITransactionsService> TransactionService = new Mock<ITransactionsService>();
+
 
         public BookControllerFactory()
         {
-            BookController = new BookController(BookService.Object);
+            BookController = new BookController(BookService.Object, TransactionService.Object);
 
             BookController.ControllerContext.HttpContext =
                 new DefaultHttpContext { User = TestData.GetAuthenticatedUser() };

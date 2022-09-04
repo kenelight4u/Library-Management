@@ -73,11 +73,12 @@
             Registration, Update and all account verification of user.
             </summary>
         </member>
-        <member name="M:LM.API.Controllers.v1.BookController.#ctor(LM.Application.Interfaces.Services.IBookService)">
+        <member name="M:LM.API.Controllers.v1.BookController.#ctor(LM.Application.Interfaces.Services.IBookService,LM.Application.Interfaces.Services.ITransactionsService)">
             <summary>
             Constructor for dependency injections
             </summary>
             <param name="bookService"></param>
+            /// <param name="transactionsService"></param>
         </member>
         <member name="M:LM.API.Controllers.v1.BookController.AddNewBook(LM.DTOs.Request.BookDTO.BookDTO)">
             <summary>
@@ -89,13 +90,6 @@
         <member name="M:LM.API.Controllers.v1.BookController.GetAllBooks(LM.Domain.Common.ViewModel.SearchVM)">
             <summary>
             This endpoint gets all Books.
-            </summary>
-            <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LM.API.Controllers.v1.BookController.ViewInventory(LM.Domain.Common.ViewModel.pagiSearchVm)">
-            <summary>
-            This endpoint gets the Inventory Records.
             </summary>
             <param name="model"></param>
             <returns></returns>
@@ -112,6 +106,50 @@
             This endpoint gets a Book by ISBN.
             </summary>
             <param name="isbn"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.BookController.ViewInventory(LM.Domain.Common.ViewModel.pagiSearchVm)">
+            <summary>
+            This endpoint gets the Inventory Records.
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.BookController.IssueBook(System.Guid)">
+            <summary>
+            This endpoint Issues out Book to Customers.
+            </summary>
+            <param name="bookID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.BookController.ReturnBook(System.Guid)">
+            <summary>
+            This endpoint Records the returned Book from Customers.
+            </summary>
+            <param name="bookID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.BookController.UserOverAllHistory(LM.Domain.Common.ViewModel.pagiSearchVm)">
+            <summary>
+            This endpoint return Customers Book History Records.
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.BookController.UserOverAllHistory(LM.Domain.Common.ViewModel.pagiSearchVm,System.Guid)">
+            <summary>
+            This endpoint return Customers Book History Records Requested by Clients.
+            </summary>
+            <param name="model"></param>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.BookController.BookOverAllHistory(LM.Domain.Common.ViewModel.pagiSearchVm,System.Guid)">
+            <summary>
+            This endpoint return Book History Records.
+            </summary>
+            <param name="model"></param>
+            <param name="bookID"></param>
             <returns></returns>
         </member>
         <member name="M:LM.API.Controllers.v1.BookController.EditABook(LM.DTOs.Request.BookDTO.EditBookDTO)">
@@ -180,47 +218,6 @@
             This endpoint Deletes a Book Genre.
             </summary>
             <param name="ID"></param>
-            <returns></returns>
-        </member>
-        <member name="T:LM.API.Controllers.v1.TransactionController">
-            <summary>
-            This controller handles all Transactions processes of this application.
-            Issue, Return, User Borrow History etc.
-            </summary>
-        </member>
-        <member name="M:LM.API.Controllers.v1.TransactionController.#ctor(LM.Application.Interfaces.Services.ITransactionsService)">
-            <summary>
-            Constructor for dependency injections
-            </summary>
-            <param name="transactionsService"></param>
-        </member>
-        <member name="M:LM.API.Controllers.v1.TransactionController.IssueBook(System.Guid)">
-            <summary>
-            This endpoint Issues out Book to Customers.
-            </summary>
-            <param name="bookID"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LM.API.Controllers.v1.TransactionController.ReturnBook(System.Guid)">
-            <summary>
-            This endpoint Records the returned Book from Customers.
-            </summary>
-            <param name="bookID"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LM.API.Controllers.v1.TransactionController.UserOverAllHistory(LM.Domain.Common.ViewModel.pagiSearchVm)">
-            <summary>
-            This endpoint return Customers Book History Records.
-            </summary>
-            <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LM.API.Controllers.v1.TransactionController.UserOverAllHistory(LM.Domain.Common.ViewModel.pagiSearchVm,System.Guid)">
-            <summary>
-            This endpoint return Customers Book History Records Requested by Clients.
-            </summary>
-            <param name="model"></param>
-            <param name="userId"></param>
             <returns></returns>
         </member>
         <member name="T:LM.API.Program">

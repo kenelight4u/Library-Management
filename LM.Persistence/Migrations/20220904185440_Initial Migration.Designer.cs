@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LM.Persistence.Migrations
 {
     [DbContext(typeof(LibraryManagementDbContext))]
-    [Migration("20220903214904_First")]
-    partial class First
+    [Migration("20220904185440_Initial Migration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -1,6 +1,7 @@
 ﻿using LM.Application.Interfaces.Utilities;
 using LM.Domain.Common;
 using LM.Domain.Entities;
+using LM.Domain.Utils;
 using LM.DTOs.Request.AuthDTO;
 using LM.DTOs.Response.AuthVM;
 using Microsoft.AspNetCore.Authorization;
@@ -91,18 +92,20 @@ namespace LM.API.Controllers.v1
                 var isCreated = await _userManager.CreateAsync(newUser, model.Password);
                 if (isCreated.Succeeded)
                 {
-                    if (!_roleManager.RoleExistsAsync("Customers").Result)
+                    if (!_roleManager.RoleExistsAsync(CoreConstants.Customer).Result)
                     {
                         var role = new IdentityRole()
                         {
-                            Name = "Customers"
+                            Name = CoreConstants.Customer
                         };
                         IdentityResult roleResult = _roleManager.CreateAsync(role).Result;
-                        _userManager.AddToRoleAsync(newUser, "Customers").Wait();
+
+                        if (roleResult.Succeeded)
+                            _userManager.AddToRoleAsync(newUser, CoreConstants.Customer).Wait();
                     }
                     else
                     {
-                        _userManager.AddToRoleAsync(newUser, "Customers").Wait();
+                        _userManager.AddToRoleAsync(newUser, CoreConstants.Customer).Wait();
                     }
 
                     return Ok(new ResultModel<bool>
@@ -156,18 +159,20 @@ namespace LM.API.Controllers.v1
                 var isCreated = await _userManager.CreateAsync(newUser, model.Password);
                 if (isCreated.Succeeded)
                 {
-                    if (!_roleManager.RoleExistsAsync("Clients").Result)
+                    if (!_roleManager.RoleExistsAsync(CoreConstants.Client).Result)
                     {
                         var role = new IdentityRole()
                         {
-                            Name = "Clients"
+                            Name = CoreConstants.Client
                         };
                         IdentityResult roleResult = _roleManager.CreateAsync(role).Result;
-                        _userManager.AddToRoleAsync(newUser, "Clients").Wait();
+
+                        if(roleResult.Succeeded)
+                            _userManager.AddToRoleAsync(newUser, CoreConstants.Client).Wait();
                     }
                     else
                     {
-                        _userManager.AddToRoleAsync(newUser, "Clients").Wait();
+                        _userManager.AddToRoleAsync(newUser, CoreConstants.Client).Wait();
                     }
 
                     return Ok(new ResultModel<bool>
@@ -299,7 +304,7 @@ namespace LM.API.Controllers.v1
                 var user = await _userManager.GetUserAsync(User);
                 if (user is null)
                 {
-                    return Unauthorized();
+                    return BadRequest(new ResultModel<bool> { Message = "User Not Found!", Data = false });
                 }
 
                 var result = await _userManager.ChangePasswordAsync(user,

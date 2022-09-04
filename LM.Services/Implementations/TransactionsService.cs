@@ -153,6 +153,18 @@ namespace LM.Services.Implementations
             return await SearchBooksInv(query, model);
         }
 
+        public async Task<ResultModel<PagedList<BookHistVm>>> BookOverAllHistory(pagiSearchVm model, Guid bookID)
+        {
+            var book = await GetBookByID(bookID);
+
+            if (book == null)
+                return new ResultModel<PagedList<BookHistVm>>($"Book with Book ID {bookID} doesn't exixts");
+
+            var query = GetBookHistory(bookID);
+
+            return await SearchBooks(query, model);
+        }
+
         private Task<Book> GetBookByID(Guid ID)
         {
             return _book.DataStore.GetAllQuery().Where(x => x.ID == ID).FirstOrDefaultAsync();
@@ -168,6 +180,12 @@ namespace LM.Services.Implementations
         {
             return _bookHistory.DataStore.GetAllQuery().Include(x => x.Books).Include(x => x.LMUsers)
                 .Where(x => x.LMUserId == userId);
+        }
+
+        private IQueryable<BookHistory> GetBookHistory(Guid bookID)
+        {
+            return _bookHistory.DataStore.GetAllQuery().Include(x => x.Books).Include(x => x.LMUsers)
+                .Where(x => x.BookId == bookID);
         }
 
         private async Task<ResultModel<PagedList<BookHistoryVM>>> SearchBooksInv(IQueryable<BookHistory> query, pagiSearchVm model)
@@ -187,6 +205,26 @@ namespace LM.Services.Implementations
             var data = new PagedList<BookHistoryVM>(bookhisvms, model.PageIndex, model.PageSize, bookhistories.TotalItemCount);
 
             return new ResultModel<PagedList<BookHistoryVM>> { Data = data, Message = $"Found {bookhisvms.Count} Books." };
+        }
+
+        private async Task<ResultModel<PagedList<BookHistVm>>> SearchBooks(IQueryable<BookHistory> query, pagiSearchVm model)
+        {
+            var bookhistories = await query.OrderByDescending(x => x.BorrowStatus == Domain.Enums.BookCustomerStatus.IssuedOut)
+                .ToPagedListAsync(model.PageIndex, model.PageSize);
+
+            var bookhisvms = bookhistories.Select(x => new BookHistVm
+            {
+                Title = x.Books?.Title,
+                ISBN = x.Books?.ISBN,
+                BookStatus = x.BorrowStatus.GetDescription(),
+                IssuedDate = x.IssuedDate.ToLongDateString(),
+                ReturnedDate = (x.BorrowStatus == Domain.Enums.BookCustomerStatus.IssuedOut) ? "Not Returned" : x.ReturnedDate.ToLongDateString(),
+                UserFullName = $"{x.LMUsers.FirstName} {x.LMUsers.LastName}" 
+            }).ToList();
+
+            var data = new PagedList<BookHistVm>(bookhisvms, model.PageIndex, model.PageSize, bookhistories.TotalItemCount);
+
+            return new ResultModel<PagedList<BookHistVm>> { Data = data, Message = $"Found {bookhisvms.Count} Books." };
         }
     }
 }
