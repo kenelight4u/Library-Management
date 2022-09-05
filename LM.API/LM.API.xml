@@ -10,6 +10,31 @@
             Registration, Update and all account verification of user.
             </summary>
         </member>
+        <member name="F:LM.API.Controllers.v1.AuthController._userManager">
+            <summary>
+            The User Manager
+            </summary>
+        </member>
+        <member name="F:LM.API.Controllers.v1.AuthController._signInManager">
+            <summary>
+            The SignInManager
+            </summary>
+        </member>
+        <member name="F:LM.API.Controllers.v1.AuthController._roleManager">
+            <summary>
+            The RoleManagement
+            </summary>
+        </member>
+        <member name="F:LM.API.Controllers.v1.AuthController._config">
+            <summary>
+            The Iconfiguration
+            </summary>
+        </member>
+        <member name="F:LM.API.Controllers.v1.AuthController._contextAccessor">
+            <summary>
+            The IContextAccessor
+            </summary>
+        </member>
         <member name="M:LM.API.Controllers.v1.AuthController.#ctor(Microsoft.AspNetCore.Identity.UserManager{LM.Domain.Entities.LMUser},Microsoft.AspNetCore.Identity.SignInManager{LM.Domain.Entities.LMUser},Microsoft.AspNetCore.Identity.RoleManager{Microsoft.AspNetCore.Identity.IdentityRole},Microsoft.Extensions.Configuration.IConfiguration,LM.Application.Interfaces.Utilities.IContextAccessor)">
             <summary>
             Constructor for dependency injections
@@ -25,40 +50,40 @@
             This endpoint registers custormers on this application.
             </summary>
             <param name="model"></param>
-            <returns></returns> 
+            <returns>IActionResult.</returns> 
         </member>
         <member name="M:LM.API.Controllers.v1.AuthController.ClientsSignUp(LM.DTOs.Request.AuthDTO.SignUpDTO)">
             <summary>
             This endpoint registers Clients on this application.
             </summary>
             <param name="model"></param>
-            <returns></returns> 
+            <returns>IActionResult.</returns> 
         </member>
         <member name="M:LM.API.Controllers.v1.AuthController.SignIn(LM.DTOs.Request.AuthDTO.SignInDTO)">
             <summary>
             This endpoint signs in a user whose correct credentials are sent in.
             </summary>
-            <returns></returns>
+            <returns>IActionResult.</returns>
         </member>
         <member name="M:LM.API.Controllers.v1.AuthController.UpdateAccount(LM.DTOs.Request.AuthDTO.EditDTO)">
             <summary>
             This endpoint Updates Users Details on this application.
             </summary>
             <param name="model"></param>
-            <returns></returns> 
+            <returns>IActionResult.</returns> 
         </member>
         <member name="M:LM.API.Controllers.v1.AuthController.ChangePassword(LM.DTOs.Request.AuthDTO.ChangePasswordDTO)">
             <summary>
             This endpoint changes user's account password.
             </summary>
             <param name="model"></param>
-            <returns></returns>
+            <returns>IActionResult.</returns>
         </member>
         <member name="M:LM.API.Controllers.v1.AuthController.LogOut">
             <summary>
             This endpoint logs out users.
             </summary>
-            <returns></returns>
+            <returns>IActionResult.</returns>
         </member>
         <member name="M:LM.API.Controllers.v1.AuthController.GenerateJWT(LM.Domain.Entities.LMUser)">
             <summary>
@@ -73,6 +98,16 @@
             Registration, Update and all account verification of user.
             </summary>
         </member>
+        <member name="F:LM.API.Controllers.v1.BookController._bookService">
+            <summary>
+            The BookService
+            </summary>
+        </member>
+        <member name="F:LM.API.Controllers.v1.BookController._transactionsService">
+            <summary>
+            The TransaactionService
+            </summary>
+        </member>
         <member name="M:LM.API.Controllers.v1.BookController.#ctor(LM.Application.Interfaces.Services.IBookService,LM.Application.Interfaces.Services.ITransactionsService)">
             <summary>
             Constructor for dependency injections
@@ -85,56 +120,56 @@
             This endpoint creates a new Book.
             </summary>
             <param name="bookGDTO"></param>
-            <returns></returns>
+            <returns>IActionResult.</returns>
         </member>
         <member name="M:LM.API.Controllers.v1.BookController.GetAllBooks(LM.Domain.Common.ViewModel.SearchVM)">
             <summary>
             This endpoint gets all Books.
             </summary>
             <param name="model"></param>
-            <returns></returns>
+            <returns>IActionResult.</returns>
         </member>
         <member name="M:LM.API.Controllers.v1.BookController.GetABookByID(System.Guid)">
             <summary>
             This endpoint gets a Book by ID.
             </summary>
             <param name="ID"></param>
-            <returns></returns>
+            <returns>IActionResult.</returns>
         </member>
         <member name="M:LM.API.Controllers.v1.BookController.GetABookByISBN(System.String)">
             <summary>
             This endpoint gets a Book by ISBN.
             </summary>
             <param name="isbn"></param>
-            <returns></returns>
+            <returns>IActionResult.</returns>
         </member>
         <member name="M:LM.API.Controllers.v1.BookController.ViewInventory(LM.Domain.Common.ViewModel.pagiSearchVm)">
             <summary>
             This endpoint gets the Inventory Records.
             </summary>
             <param name="model"></param>
-            <returns></returns>
+            <returns>IActionResult.</returns>
         </member>
         <member name="M:LM.API.Controllers.v1.BookController.IssueBook(System.Guid)">
             <summary>
             This endpoint Issues out Book to Customers.
             </summary>
             <param name="bookID"></param>
-            <returns></returns>
+            <returns>IActionResult.</returns>
         </member>
         <member name="M:LM.API.Controllers.v1.BookController.ReturnBook(System.Guid)">
             <summary>
             This endpoint Records the returned Book from Customers.
             </summary>
             <param name="bookID"></param>
-            <returns></returns>
+            <returns>IActionResult.</returns>
         </member>
         <member name="M:LM.API.Controllers.v1.BookController.UserOverAllHistory(LM.Domain.Common.ViewModel.pagiSearchVm)">
             <summary>
             This endpoint return Customers Book History Records.
             </summary>
             <param name="model"></param>
-            <returns></returns>
+            <returns>IActionResult.</returns>
         </member>
         <member name="M:LM.API.Controllers.v1.BookController.UserOverAllHistory(LM.Domain.Common.ViewModel.pagiSearchVm,System.Guid)">
             <summary>
@@ -142,7 +177,7 @@
             </summary>
             <param name="model"></param>
             <param name="userId"></param>
-            <returns></returns>
+            <returns>IActionResult.</returns>
         </member>
         <member name="M:LM.API.Controllers.v1.BookController.BookOverAllHistory(LM.Domain.Common.ViewModel.pagiSearchVm,System.Guid)">
             <summary>
@@ -150,33 +185,38 @@
             </summary>
             <param name="model"></param>
             <param name="bookID"></param>
-            <returns></returns>
+            <returns>IActionResult.</returns>
         </member>
         <member name="M:LM.API.Controllers.v1.BookController.EditABook(LM.DTOs.Request.BookDTO.EditBookDTO)">
             <summary>
             This endpoint updates a Book Details
             </summary>
             <param name="bookDTO"></param>
-            <returns></returns>
+            <returns>IActionResult.</returns>
         </member>
         <member name="M:LM.API.Controllers.v1.BookController.UpdateInventory(LM.DTOs.Request.BookDTO.BookInventoryUpdateDTO)">
             <summary>
             This endpoint updates a Book Inventory (quantity added)
             </summary>
             <param name="bookInvDTO"></param>
-            <returns></returns>
+            <returns>IActionResult.</returns>
         </member>
         <member name="M:LM.API.Controllers.v1.BookController.DeleteBook(System.Guid)">
             <summary>
             This endpoint Deletes a Book.
             </summary>
             <param name="ID"></param>
-            <returns></returns>
+            <returns>IActionResult.</returns>
         </member>
         <member name="T:LM.API.Controllers.v1.BookGenresController">
             <summary>
             This controller handles all Book Genres processes of this application.
             Registration, Update and all account verification of user.
+            </summary>
+        </member>
+        <member name="F:LM.API.Controllers.v1.BookGenresController._bookGenresService">
+            <summary>
+            The BookGeres Service
             </summary>
         </member>
         <member name="M:LM.API.Controllers.v1.BookGenresController.#ctor(LM.Application.Interfaces.Services.IBookGenresService)">
@@ -190,35 +230,35 @@
             This endpoint creates Book Genre.
             </summary>
             <param name="bookGenresDTO"></param>
-            <returns></returns>
+            <returns>IActionResult.</returns>
         </member>
         <member name="M:LM.API.Controllers.v1.BookGenresController.GetAllBooksGenres(LM.Domain.Common.ViewModel.SearchVM)">
             <summary>
             This endpoint gets all Book Genres.
             </summary>
             <param name="model"></param>
-            <returns></returns>
+            <returns>IActionResult.</returns>
         </member>
         <member name="M:LM.API.Controllers.v1.BookGenresController.GetABooksGenres(System.Guid)">
             <summary>
             This endpoint gets a Book Genres and all Books under it.
             </summary>
             <param name="ID"></param>
-            <returns></returns>
+            <returns>IActionResult.</returns>
         </member>
         <member name="M:LM.API.Controllers.v1.BookGenresController.UpdateBookGenre(LM.DTOs.Request.BookGenreDTO.EditBookGenresDTO)">
             <summary>
             This endpoint updates a Book Genre Details
             </summary>
             <param name="bookGenresDTO"></param>
-            <returns></returns>
+            <returns>IActionResult.</returns>
         </member>
         <member name="M:LM.API.Controllers.v1.BookGenresController.DeleteBookGenre(System.Guid)">
             <summary>
             This endpoint Deletes a Book Genre.
             </summary>
             <param name="ID"></param>
-            <returns></returns>
+            <returns>IActionResult.</returns>
         </member>
         <member name="T:LM.API.Program">
             <summary>

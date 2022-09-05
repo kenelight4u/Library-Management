@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace LM.Domain.Common
 {
+    /// <summary>
+    /// Class BaseEntity
+    /// </summary>
     public class BaseEntity
     {
         /// <summary>

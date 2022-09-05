@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LM.Test.ControllerTests
+namespace LM.Test.ControllerTests.AuthControllerTest
 {
     public class AuthControllerFactory
     {
