@@ -9,15 +9,32 @@ using System.Threading.Tasks;
 
 namespace LM.Domain.Entities
 {
+    /// <summary>
+    /// Class Book Inventory
+    /// implements the <see cref="BaseEntity"/>
+    /// </summary>
     public class BookHistory : BaseEntity
     {
+        /// <summary>
+        /// Gets or sets the BookID.
+        /// </summary>
+        /// <value>The Book ID.</value>
         public Guid? BookId { get; set; }
-
+        /// <summary>
+        /// Gets or sets the Book.
+        /// </summary>
+        /// <value>The Books.</value>
         [ForeignKey(nameof(BookId))]
         public virtual Book Books { get; set; }
-
+        /// <summary>
+        /// Gets or sets the LMUserID.
+        /// </summary>
+        /// <value>The LMUser ID.</value>
         public string LMUserId { get; set; }
-
+        /// <summary>
+        /// Gets or sets the LM User.
+        /// </summary>
+        /// <value>The LM User.</value>
         [ForeignKey(nameof(LMUserId))]
         public virtual LMUser LMUsers { get; set; }
 

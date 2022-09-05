@@ -8,12 +8,27 @@ using System.Threading.Tasks;
 
 namespace LM.DTOs.Response.BookVM
 {
+    /// <summary>
+    /// Class Book Inventory
+    /// </summary>
     public class BookInventoryVM
     {
+        // <summary>
+        /// Gets or sets the Quantity.
+        /// </summary>
+        /// <value>The Quantity.</value>
         public int Quantity { get; set; }
-
+        /// <summary>
+        /// Gets or sets the BookShortVM
+        /// </summary>
+        /// <value>The BookShort vm.</value>
         public BookShortVM Books { get; set; }
 
+        /// <summary>
+        /// Converts BookInventory to BookGenre VM
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>BookInventoryVM.</returns
         public static implicit operator BookInventoryVM(BookInventory model)
         {
             return model == null

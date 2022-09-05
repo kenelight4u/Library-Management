@@ -25,8 +25,13 @@ namespace LM.API.Controllers.v1
     [Authorize(AuthenticationSchemes = "Bearer")]
     public class BookController : BaseController
     {
+        /// <summary>
+        /// The BookService
+        /// </summary>
         private readonly IBookService _bookService;
-
+        /// <summary>
+        /// The TransaactionService
+        /// </summary>
         private readonly ITransactionsService _transactionsService;
 
         /// <summary>
@@ -44,7 +49,7 @@ namespace LM.API.Controllers.v1
         /// This endpoint creates a new Book.
         /// </summary>
         /// <param name="bookGDTO"></param>
-        /// <returns></returns>
+        /// <returns>IActionResult.</returns>
         [HttpPost("Book")]
         [Authorize(AuthenticationSchemes = "Bearer", Roles = CoreConstants.SuperAdmin)]
         [ProducesResponseType(typeof(ApiResponse<Guid>), 200)]
@@ -72,7 +77,7 @@ namespace LM.API.Controllers.v1
         /// This endpoint gets all Books.
         /// </summary>
         /// <param name="model"></param>
-        /// <returns></returns>
+        /// <returns>IActionResult.</returns>
         [HttpGet("Books")]
         [ProducesResponseType(typeof(ApiResponse<PagedList<BookVM>>), 200)]
         public async Task<IActionResult> GetAllBooks([FromQuery] SearchVM model)
@@ -99,7 +104,7 @@ namespace LM.API.Controllers.v1
         /// This endpoint gets a Book by ID.
         /// </summary>
         /// <param name="ID"></param>
-        /// <returns></returns>
+        /// <returns>IActionResult.</returns>
         [HttpGet("ID")]
         [ProducesResponseType(typeof(ApiResponse<BookVM>), 200)]
         public async Task<IActionResult> GetABookByID([FromQuery] Guid ID)
@@ -125,7 +130,7 @@ namespace LM.API.Controllers.v1
         /// This endpoint gets a Book by ISBN.
         /// </summary>
         /// <param name="isbn"></param>
-        /// <returns></returns>
+        /// <returns>IActionResult.</returns>
         [HttpGet("ISBN")]
         [ProducesResponseType(typeof(ApiResponse<BookVM>), 200)]
         public async Task<IActionResult> GetABookByISBN([FromQuery] string isbn)
@@ -152,7 +157,7 @@ namespace LM.API.Controllers.v1
         /// This endpoint gets the Inventory Records.
         /// </summary>
         /// <param name="model"></param>
-        /// <returns></returns>
+        /// <returns>IActionResult.</returns>
         [HttpGet("Inventory")]
         [ProducesResponseType(typeof(ApiResponse<PagedList<BookInventoryVM>>), 200)]
         public async Task<IActionResult> ViewInventory([FromQuery] pagiSearchVm model)
@@ -179,7 +184,7 @@ namespace LM.API.Controllers.v1
         /// This endpoint Issues out Book to Customers.
         /// </summary>
         /// <param name="bookID"></param>
-        /// <returns></returns>
+        /// <returns>IActionResult.</returns>
         [HttpPost("Borrow")]
         [Authorize(AuthenticationSchemes = "Bearer", Roles = CoreConstants.SuperAdmin + " , " + CoreConstants.Customer)]
         [ProducesResponseType(typeof(ApiResponse<IssueBookVm>), 200)]
@@ -207,7 +212,7 @@ namespace LM.API.Controllers.v1
         /// This endpoint Records the returned Book from Customers.
         /// </summary>
         /// <param name="bookID"></param>
-        /// <returns></returns>
+        /// <returns>IActionResult.</returns>
         [HttpPost("Return")]
         [Authorize(AuthenticationSchemes = "Bearer", Roles = CoreConstants.SuperAdmin + " , " + CoreConstants.Customer)]
         [ProducesResponseType(typeof(ApiResponse<returnBookVm>), 200)]
@@ -235,7 +240,7 @@ namespace LM.API.Controllers.v1
         /// This endpoint return Customers Book History Records.
         /// </summary>
         /// <param name="model"></param>
-        /// <returns></returns>
+        /// <returns>IActionResult.</returns>
         [HttpGet("History")]
         [Authorize(AuthenticationSchemes = "Bearer", Roles = CoreConstants.SuperAdmin + " , " + CoreConstants.Customer)]
         [ProducesResponseType(typeof(ApiResponse<PagedList<BookHistoryVM>>), 200)]
@@ -264,7 +269,7 @@ namespace LM.API.Controllers.v1
         /// </summary>
         /// <param name="model"></param>
         /// <param name="userId"></param>
-        /// <returns></returns>
+        /// <returns>IActionResult.</returns>
         [HttpGet("History/UserID")]
         [Authorize(AuthenticationSchemes = "Bearer", Roles = CoreConstants.SuperAdmin + " , " + CoreConstants.Client)]
         [ProducesResponseType(typeof(ApiResponse<PagedList<BookHistoryVM>>), 200)]
@@ -293,7 +298,7 @@ namespace LM.API.Controllers.v1
         /// </summary>
         /// <param name="model"></param>
         /// <param name="bookID"></param>
-        /// <returns></returns>
+        /// <returns>IActionResult.</returns>
         [HttpGet("History/BookID")]
         [ProducesResponseType(typeof(ApiResponse<PagedList<BookHistVm>>), 200)]
         public async Task<IActionResult> BookOverAllHistory([FromQuery] pagiSearchVm model, Guid bookID)
@@ -319,7 +324,7 @@ namespace LM.API.Controllers.v1
         /// This endpoint updates a Book Details
         /// </summary>
         /// <param name="bookDTO"></param>
-        /// <returns></returns>
+        /// <returns>IActionResult.</returns>
         [HttpPut("EditBook")]
         [Authorize(AuthenticationSchemes = "Bearer", Roles = CoreConstants.SuperAdmin)]
         [ProducesResponseType(typeof(ApiResponse<string>), 200)]
@@ -346,7 +351,7 @@ namespace LM.API.Controllers.v1
         /// This endpoint updates a Book Inventory (quantity added)
         /// </summary>
         /// <param name="bookInvDTO"></param>
-        /// <returns></returns>
+        /// <returns>IActionResult.</returns>
         [HttpPut("UpdateInventory")]
         [Authorize(AuthenticationSchemes = "Bearer", Roles = CoreConstants.SuperAdmin)]
         [ProducesResponseType(typeof(ApiResponse<string>), 200)]
@@ -373,7 +378,7 @@ namespace LM.API.Controllers.v1
         /// This endpoint Deletes a Book.
         /// </summary>
         /// <param name="ID"></param>
-        /// <returns></returns>
+        /// <returns>IActionResult.</returns>
         [HttpDelete()]
         [Authorize(AuthenticationSchemes = "Bearer", Roles = CoreConstants.SuperAdmin)]
         [ProducesResponseType(typeof(ApiResponse<string>), 200)]

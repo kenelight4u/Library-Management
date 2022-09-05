@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LM.Domain.Entities
 {
+    /// <summary>
+    /// Class LM User
+    /// Implements the <see cref="IdentityUser"/>
+    /// </summary>
     public class LMUser : IdentityUser
     {
         /// <summary>
@@ -36,7 +37,10 @@ namespace LM.Domain.Entities
         /// </summary>
         /// <value><c>true</c> if this instance is active; otherwise, <c>false</c>.</value>
         public bool IsActive { get; set; }
-
+        /// <summary>
+        /// Gets or sets the Book Histories.
+        /// </summary>
+        /// <value>The Book Histories.</value>
         public List<BookHistory> BookHistories { get; set; } = new List<BookHistory>();
     }
 }

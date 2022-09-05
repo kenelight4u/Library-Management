@@ -21,6 +21,9 @@ namespace LM.API.Controllers.v1
     [Authorize(AuthenticationSchemes = "Bearer")]
     public class BookGenresController :  BaseController
     {
+        /// <summary>
+        /// The BookGeres Service
+        /// </summary>
         private readonly IBookGenresService _bookGenresService;
 
         /// <summary>
@@ -36,7 +39,7 @@ namespace LM.API.Controllers.v1
         /// This endpoint creates Book Genre.
         /// </summary>
         /// <param name="bookGenresDTO"></param>
-        /// <returns></returns>
+        /// <returns>IActionResult.</returns>
         [HttpPost("BookGenre")]
         [Authorize(AuthenticationSchemes = "Bearer", Roles = CoreConstants.SuperAdmin)]
         [ProducesResponseType(typeof(ApiResponse<string>), 200)]
@@ -64,7 +67,7 @@ namespace LM.API.Controllers.v1
         /// This endpoint gets all Book Genres.
         /// </summary>
         /// <param name="model"></param>
-        /// <returns></returns>
+        /// <returns>IActionResult.</returns>
         [HttpGet("BookGenres")]
         [ProducesResponseType(typeof(ApiResponse<PagedList<BookGenresVM>>), 200)]
         public async Task<IActionResult> GetAllBooksGenres([FromQuery] SearchVM model)
@@ -91,7 +94,7 @@ namespace LM.API.Controllers.v1
         /// This endpoint gets a Book Genres and all Books under it.
         /// </summary>
         /// <param name="ID"></param>
-        /// <returns></returns>
+        /// <returns>IActionResult.</returns>
         [HttpGet("ID")]
         [ProducesResponseType(typeof(ApiResponse<BookGenresVM>), 200)]
         public async Task<IActionResult> GetABooksGenres([FromQuery] Guid ID)
@@ -118,7 +121,7 @@ namespace LM.API.Controllers.v1
         /// This endpoint updates a Book Genre Details
         /// </summary>
         /// <param name="bookGenresDTO"></param>
-        /// <returns></returns>
+        /// <returns>IActionResult.</returns>
         [HttpPut()]
         [Authorize(AuthenticationSchemes = "Bearer", Roles = CoreConstants.SuperAdmin)]
         [ProducesResponseType(typeof(ApiResponse<string>), 200)]
@@ -145,7 +148,7 @@ namespace LM.API.Controllers.v1
         /// This endpoint Deletes a Book Genre.
         /// </summary>
         /// <param name="ID"></param>
-        /// <returns></returns>
+        /// <returns>IActionResult.</returns>
         [HttpDelete()]
         [Authorize(AuthenticationSchemes = "Bearer", Roles = CoreConstants.SuperAdmin)]
         [ProducesResponseType(typeof(ApiResponse<string>), 200)]

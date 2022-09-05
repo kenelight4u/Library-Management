@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace LM.Domain.Entities
 {
+    /// <summary>
+    /// Class Book Inventory
+    /// implements the <see cref="BaseEntity"/>
+    /// </summary>
     public class Book : BaseEntity
     {
         /// <summary>
@@ -35,12 +39,21 @@ namespace LM.Domain.Entities
         /// </summary>
         /// <value>The Quantity.</value>
         public int Quantity { get; set; }
-
+        /// <summary>
+        /// Gets or sets the BookGenreID.
+        /// </summary>
+        /// <value>The Book GenreID.</value>
         public Guid? BookGenresId { get; set; }
-
+        /// <summary>
+        /// Gets or sets the Book Genres.
+        /// </summary>
+        /// <value>The Books Genres.</value>
         [ForeignKey(nameof(BookGenresId))]
         public virtual BookGenres BookGenres { get; set; }
-
+        /// <summary>
+        /// Gets or sets the Book Histories.
+        /// </summary>
+        /// <value>The Book Histories.</value>
         public List<BookHistory> BookHistories { get; set; } = new List<BookHistory>();
     }
 }

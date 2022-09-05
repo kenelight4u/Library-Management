@@ -11,22 +11,52 @@ using System.Threading.Tasks;
 
 namespace LM.DTOs.Response.BookVM
 {
+    /// <summary>
+    /// Class of BookVM
+    /// </summary>
     public class BookVM
     {
+        /// <summary>
+        /// Gets or sets the ID.
+        /// </summary>
+        /// <value>The ID.</value>
         public Guid ID { get; set; }
-
+        /// <summary>
+        /// Gets or sets the ISBN.
+        /// </summary>
+        /// <value>The ISBN.</value>
         public string ISBN { get; set; }
-
+        /// <summary>
+        /// Gets or sets the Title.
+        /// </summary>
+        /// <value>The Title.</value>
         public string Title { get; set; }
-        
+        /// <summary>
+        /// Gets or sets the Author
+        /// </summary>
+        /// <value>The Author.</value>
         public string Author { get; set; }
-        
+        /// <summary>
+        /// Gets or sets the Description.
+        /// </summary>
+        /// <value>The Description.</value>
         public string Description { get; set; }
-
+        // <summary>
+        /// Gets or sets the Quantity.
+        /// </summary>
+        /// <value>The Quantity.</value>
         public int Quantity { get; set; }
-
+        /// <summary>
+        /// Gets or sets the Available Status.
+        /// </summary>
+        /// <value>The Available Status.</value>
         public string AvailabilityStatus { get; set; }
 
+        /// <summary>
+        /// Converts Book to BookVM
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>BookVM.</returns>
         public static implicit operator BookVM(Book model)
         {
             return model == null
