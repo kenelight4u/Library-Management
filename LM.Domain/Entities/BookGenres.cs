@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace LM.Domain.Entities
 {
+    /// <summary>
+    /// Class Book Inventory
+    /// implements the <see cref="BaseEntity"/>
+    /// </summary>
     public class BookGenres : BaseEntity
     {
         /// <summary>
@@ -19,7 +23,10 @@ namespace LM.Domain.Entities
         /// </summary>
         /// <value>The Description.</value>
         public string Description { get; set; }
-
+        /// <summary>
+        /// Gets or sets the Book.
+        /// </summary>
+        /// <value>The Books.</value>
         public List<Book> Books { get; set; } = new List<Book>();
     }
 }

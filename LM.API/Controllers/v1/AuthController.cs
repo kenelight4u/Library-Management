@@ -27,10 +27,25 @@ namespace LM.API.Controllers.v1
     [ApiVersion("1.0")]
     public class AuthController : BaseController
     {
+        /// <summary>
+        /// The User Manager
+        /// </summary>
         private readonly UserManager<LMUser> _userManager;
+        /// <summary>
+        /// The SignInManager
+        /// </summary>
         private readonly SignInManager<LMUser> _signInManager;
+        /// <summary>
+        /// The RoleManagement
+        /// </summary>
         private readonly RoleManager<IdentityRole> _roleManager;
+        /// <summary>
+        /// The Iconfiguration
+        /// </summary>
         private readonly IConfiguration _config;
+        /// <summary>
+        /// The IContextAccessor
+        /// </summary>
         private readonly IContextAccessor _contextAccessor;
 
         /// <summary>
@@ -59,7 +74,7 @@ namespace LM.API.Controllers.v1
         /// This endpoint registers custormers on this application.
         /// </summary>
         /// <param name="model"></param>
-        /// <returns></returns> 
+        /// <returns>IActionResult.</returns> 
         [HttpPost("SignUp/Customers")]
         [AllowAnonymous]
         public async Task<IActionResult> SignUp([FromBody] SignUpDTO model)
@@ -126,7 +141,7 @@ namespace LM.API.Controllers.v1
         /// This endpoint registers Clients on this application.
         /// </summary>
         /// <param name="model"></param>
-        /// <returns></returns> 
+        /// <returns>IActionResult.</returns> 
         [HttpPost("SignUp/Clients")]
         [AllowAnonymous]
         public async Task<IActionResult> ClientsSignUp([FromBody] SignUpDTO model)
@@ -192,7 +207,7 @@ namespace LM.API.Controllers.v1
         /// <summary>
         /// This endpoint signs in a user whose correct credentials are sent in.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>IActionResult.</returns>
         [HttpPost("SignIn")]
         [AllowAnonymous]
         public async Task<IActionResult> SignIn([FromBody] SignInDTO model)
@@ -257,7 +272,7 @@ namespace LM.API.Controllers.v1
         /// This endpoint Updates Users Details on this application.
         /// </summary>
         /// <param name="model"></param>
-        /// <returns></returns> 
+        /// <returns>IActionResult.</returns> 
         [HttpPut("UpdateAccount")]
         [Authorize(AuthenticationSchemes = "Bearer")]
         public async Task<IActionResult> UpdateAccount([FromForm] EditDTO model)
@@ -290,7 +305,7 @@ namespace LM.API.Controllers.v1
         /// This endpoint changes user's account password.
         /// </summary>
         /// <param name="model"></param>
-        /// <returns></returns>
+        /// <returns>IActionResult.</returns>
         [Authorize(AuthenticationSchemes = "Bearer")]
         [HttpPost("ChangePassword")]
         public async Task<IActionResult> ChangePassword(ChangePasswordDTO model)
@@ -326,7 +341,7 @@ namespace LM.API.Controllers.v1
         /// <summary>
         /// This endpoint logs out users.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>IActionResult.</returns>
         [HttpPost("LogOut")]
         public async Task<IActionResult> LogOut()
         {
