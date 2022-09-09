@@ -23,6 +23,21 @@ namespace LM.Test
             }, "TestAuthentication"));
         }
 
+        public static List<LMUser> GetLMUser()
+        {
+            return new List<LMUser>
+            {
+                new LMUser
+                {
+                    FirstName = "Ekene",
+                    Email = "dev@sbsc.com",
+                    UserName = "dev@sbsc.com",
+                    LastName = "Ken",
+                    Id = UserId.ToString(),
+                }
+            };
+        }
+
         public static List<Book> GetBooks()
         {
             return new List<Book>
