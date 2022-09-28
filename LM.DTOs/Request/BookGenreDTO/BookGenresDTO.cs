@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using LM.Domain.Common;
+using MediatR;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace LM.DTOs.Request.BookGenreDTO
 {
     /// <summary>
     /// Classs of BooGenreDTO
     /// </summary>
-    public class BookGenresDTO
+    public class BookGenresDTO : IRequest<ResultModel<string>>
     {
         /// <summary>
         /// Gets or sets Name.
@@ -28,7 +27,7 @@ namespace LM.DTOs.Request.BookGenreDTO
     /// <summary>
     /// Class of EditBookGenresDTO
     /// </summary>
-    public class EditBookGenresDTO
+    public class EditBookGenresDTO : IRequest<ResultModel<string>>
     {
         /// <summary>
         /// Gets or sets the ID.
@@ -45,5 +44,6 @@ namespace LM.DTOs.Request.BookGenreDTO
         /// </summary>
         /// <value>The Description.</value>
         public string Description { get; set; }
+
     }
 }
