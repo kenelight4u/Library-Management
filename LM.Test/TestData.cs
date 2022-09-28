@@ -18,8 +18,10 @@ namespace LM.Test
         {
             return new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
             {
-                new Claim("oid", TestData.UserId.ToString()),
-                new Claim("scp", "access_crm_as_user"),
+                new Claim("http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "admin"),
+                new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier", TestData.UserId.ToString()),
+                new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress", "admin@test.com"),
+                new Claim("jti", Guid.NewGuid().ToString())
             }, "TestAuthentication"));
         }
 
@@ -33,7 +35,7 @@ namespace LM.Test
                     Email = "dev@sbsc.com",
                     UserName = "dev@sbsc.com",
                     LastName = "Ken",
-                    Id = UserId.ToString(),
+                    Id = UserId.ToString()
                 }
             };
         }

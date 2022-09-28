@@ -3,6 +3,7 @@ using LM.Domain.Entities;
 using LM.DTOs.Request.AuthDTO;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -59,32 +60,32 @@ namespace LM.Test.ControllerTests.AuthControllerTest
 
             // Assert
             Assert.Null(result);
-            //Assert.Equal(200, result.StatusCode);
         }
 
-        //[Fact]
-        //public async Task SignIn_ModelValidCase_ValidPassword()
-        //{
-        //    // Arrange
-        //    var userId = TestData.UserId;
+        [Fact]
+        public async Task SignIn_ModelValidCase_ValidPassword()
+        {
+            // Arrange
+            var userId = TestData.UserId;
+            IList<string> roles = new List<string>() { "admin", "client" };
+            var user = TestData.GetLMUser().FirstOrDefault();
 
-        //    var user = TestData.GetLMUser().FirstOrDefault();
+            var signInDto = new SignInDTO { Email = "dev@sbsc.com" };
 
-        //    var signInDto = new SignInDTO { Email = "dev@sbsc.com" };
+            _fac.UserManager.Setup(x => x.FindByEmailAsync(It.IsAny<string>()))
+                .Returns(Task.FromResult(user));
+            _fac.UserManager.Setup(x => x.CheckPasswordAsync(It.IsAny<LMUser>(), It.IsAny<string>()))
+                .Returns(Task.FromResult(true));
+            _fac.UserManager.Setup(x => x.GetRolesAsync(It.IsAny<LMUser>()))
+                .Returns(Task.FromResult(roles));
 
-        //    _fac.UserManager.Setup(x => x.FindByEmailAsync(It.IsAny<string>()))
-        //        .Returns(Task.FromResult(user));
-        //    _fac.UserManager.Setup(x => x.CheckPasswordAsync(It.IsAny<LMUser>(), It.IsAny<string>()))
-        //        .Returns(Task.FromResult(true));
-            
-            
 
-        //    // Act
-        //    var result = await _fac.AuthController.SignIn(signInDto) as OkObjectResult;
+            // Act
+            var result = await _fac.AuthController.SignIn(signInDto) as OkObjectResult;
 
-        //    // Assert
-        //    Assert.Null(result);
-        //    //Assert.Equal(200, result.StatusCode);
-        //}
+            // Assert
+            Assert.Null(result);
+            //Assert.Equal(200, result.StatusCode);
+        }
     }
 }

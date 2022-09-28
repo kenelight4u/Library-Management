@@ -260,6 +260,52 @@
             <param name="ID"></param>
             <returns>IActionResult.</returns>
         </member>
+        <member name="T:LM.API.Controllers.v1.Mediator.MediatorBookGenresController">
+            <summary>
+            This controller handles all Book Genres processes of this application.
+            Registration, Update and all account verification of user.
+            </summary>
+        </member>
+        <member name="P:LM.API.Controllers.v1.Mediator.MediatorBookGenresController.Mediator">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LM.API.Controllers.v1.Mediator.MediatorBookGenresController.AddBookGenre(LM.DTOs.Request.BookGenreDTO.BookGenresDTO)">
+            <summary>
+            This endpoint creates Book Genre.
+            </summary>
+            <param name="bookGenresDTO"></param>
+            <returns>IActionResult.</returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.Mediator.MediatorBookGenresController.GetAllBooksGenres(LM.Services.Implementations.Features.BookGenreFeatures.Queries.SearchVM)">
+            <summary>
+            This endpoint gets all Book Genres.
+            </summary>
+            <param name="model"></param>
+            <returns>IActionResult.</returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.Mediator.MediatorBookGenresController.GetABooksGenres(System.Guid)">
+            <summary>
+            This endpoint gets a Book Genres and all Books under it.
+            </summary>
+            <param name="ID"></param>
+            <returns>IActionResult.</returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.Mediator.MediatorBookGenresController.UpdateBookGenre(LM.DTOs.Request.BookGenreDTO.EditBookGenresDTO)">
+            <summary>
+            This endpoint updates a Book Genre Details
+            </summary>
+            <param name="bookGenresDTO"></param>
+            <returns>IActionResult.</returns>
+        </member>
+        <member name="M:LM.API.Controllers.v1.Mediator.MediatorBookGenresController.DeleteBookGenre(System.Guid)">
+            <summary>
+            This endpoint Deletes a Book Genre.
+            </summary>
+            <param name="ID"></param>
+            <returns>IActionResult.</returns>
+        </member>
         <member name="T:LM.API.Program">
             <summary>
             

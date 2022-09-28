@@ -1,17 +1,13 @@
 ﻿using LM.Domain.Utils;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LM.Domain.Common.ViewModel
 {
     // <summary>
     /// Class SearchVM.
     /// </summary>
-    public class SearchVM
+    public class SearchVM 
     {
         /// <summary>
         /// Gets or sets the index of the page.

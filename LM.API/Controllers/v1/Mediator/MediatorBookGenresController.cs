@@ -1,17 +1,21 @@
-﻿using LM.Application.Interfaces.Services;
-using LM.Domain.Common;
+﻿using LM.Domain.Common;
 using LM.Domain.Common.ViewModel;
 using LM.Domain.Enums;
+using LM.Domain.Utils.Pagination;
+using LM.Domain.Utils;
+using LM.DTOs.Request.BookGenreDTO;
+using LM.DTOs.Response.BookGenresVM;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using System;
-using LM.DTOs.Request.BookGenreDTO;
-using LM.Domain.Utils.Pagination;
-using LM.DTOs.Response.BookGenresVM;
-using Microsoft.AspNetCore.Authorization;
-using LM.Domain.Utils;
+using LM.Services.Implementations.Features.BookGenreFeatures.Queries;
+using LM.Services.Implementations.Features.BookGenreFeatures.Commands;
+using SearchVM = LM.Services.Implementations.Features.BookGenreFeatures.Queries.SearchVM;
 
-namespace LM.API.Controllers.v1
+namespace LM.API.Controllers.v1.Mediator
 {
     /// <summary>
     /// This controller handles all Book Genres processes of this application.
@@ -19,21 +23,25 @@ namespace LM.API.Controllers.v1
     /// </summary>
     [ApiVersion("1.0")]
     [Authorize(AuthenticationSchemes = "Bearer")]
-    public class BookGenresController : BaseController
+    public class MediatorBookGenresController : BaseController
     {
-        /// <summary>
-        /// The BookGeres Service
-        /// </summary>
-        private readonly IBookGenresService _bookGenresService;
+        //private readonly IMediator Mediator;
+
+        private IMediator _mediator;
 
         /// <summary>
-        /// Constructor for dependency injections
+        /// 
         /// </summary>
-        /// <param name="bookGenresService"></param>
-        public BookGenresController(IBookGenresService bookGenresService)
-        {
-            this._bookGenresService = bookGenresService;
-        }
+        /// <param name="mediator"></param>
+        //public MediatorBookGenresController(IMediator mediator)
+        //{
+        //    Mediator = mediator;
+        //}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
 
         /// <summary>
         /// This endpoint creates Book Genre.
@@ -49,7 +57,7 @@ namespace LM.API.Controllers.v1
 
             try
             {
-                var result = await _bookGenresService.AddBookGenre(bookGenresDTO);
+                var result = await Mediator.Send(bookGenresDTO);
 
                 if (!result.HasError)
                     return ApiResponse<string>(message: result.Message, codes: ApiResponseCodes.OK, data: result.Data, totalCount: 1);
@@ -76,7 +84,7 @@ namespace LM.API.Controllers.v1
 
             try
             {
-                var result = await _bookGenresService.ViewAllBooksGenres(model);
+                var result = await Mediator.Send(model);
 
                 if (!result.HasError)
                     return ApiResponse<PagedList<BookGenresVM>>(message: result.Message, codes: ApiResponseCodes.OK, data: result.Data, totalCount: result.Data.TotalItemCount);
@@ -103,7 +111,7 @@ namespace LM.API.Controllers.v1
 
             try
             {
-                var result = await _bookGenresService.ViewABooksGenre(ID);
+                var result = await Mediator.Send(new GetBookGenreByIdQuery { ID = ID } );
 
                 if (!result.HasError)
                     return ApiResponse<BookGenresVM>(message: result.Message, codes: ApiResponseCodes.OK, data: result.Data, totalCount: 1);
@@ -131,7 +139,7 @@ namespace LM.API.Controllers.v1
 
             try
             {
-                var result = await _bookGenresService.EditABookGenre(bookGenresDTO);
+                var result = await Mediator.Send(bookGenresDTO);
 
                 if (!result.HasError)
                     return ApiResponse<string>(message: result.Message, codes: ApiResponseCodes.OK, data: result.Data, totalCount: 1);
@@ -156,7 +164,7 @@ namespace LM.API.Controllers.v1
         {
             try
             {
-                var result = await _bookGenresService.DeleteABookGenre(ID);
+                var result = await Mediator.Send(new DeleteBookGenreCommand { ID = ID });
 
                 if (!result.HasError)
                     return ApiResponse<string>(message: result.Message, codes: ApiResponseCodes.OK, data: result.Data, totalCount: 1);
